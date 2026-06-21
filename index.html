@@ -1,31 +1,32 @@
 <!DOCTYPE html>
-<html lang="fr" x-data="churchApp()" x-init="init()">
+<html lang="fr" x-data="iccApp()" x-init="init()">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cité Bethel — Église Assemblée Centrale</title>
-  <meta name="description" content="Cité Bethel — Église du Pasteur Moïse Mbiye. Cultes chaque dimanche à 7h30, 11h30 et 16h00. Kinshasa, RDC." />
+  <title>Impact Centre Chrétien RDC — Kinshasa</title>
+  <meta name="description" content="Impact Centre Chrétien RDC — Pasteurs Ghislain & Rossy Biabatantou. Cultes chaque samedi à 17h et dimanche à 10h. Kasa-Vubu, Kinshasa, RDC." />
 
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Alpine.js -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet" />
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            gold: { 400: '#F5C842', 500: '#E6B800', 600: '#CC9900' },
-            royal: { 900: '#0D1B4B', 800: '#1A2E6B', 700: '#263D8B' },
+            icc: {
+              purple: '#5B0FA8',
+              dpurple: '#3B0A6F',
+              lpurple: '#7B2FBE',
+              xpurple: '#9D4EDD',
+            },
+            gold: { 400: '#F5C842', 500: '#E6A817', 600: '#C98A00' },
           },
           fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
             serif: ['Playfair Display', 'serif'],
-            sans: ['Inter', 'sans-serif'],
           },
         }
       }
@@ -34,1204 +35,1217 @@
 
   <style>
     [x-cloak] { display: none !important; }
-
     html { scroll-behavior: smooth; }
 
-    .hero-bg {
-      background: linear-gradient(135deg, #0D1B4B 0%, #1e1b4b 40%, #4c1d95 70%, #0D1B4B 100%);
+    /* ── Gradient ICC ── */
+    .icc-grad {
+      background: linear-gradient(135deg, #3B0A6F 0%, #5B0FA8 50%, #7B2FBE 100%);
+    }
+    .icc-grad-dark {
+      background: linear-gradient(135deg, #1a0535 0%, #3B0A6F 60%, #5B0FA8 100%);
+    }
+    .icc-grad-h {
+      background: linear-gradient(90deg, #3B0A6F, #5B0FA8, #9D4EDD);
+    }
+
+    /* ── Hero ── */
+    .hero-section {
+      background: linear-gradient(135deg, #1a0535 0%, #3B0A6F 40%, #5B0FA8 70%, #9D4EDD 100%);
       position: relative;
       overflow: hidden;
     }
-    .hero-bg::before {
+    .hero-section::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      background: radial-gradient(ellipse at 70% 50%, rgba(157,78,221,0.3) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(91,15,168,0.4) 0%, transparent 50%);
     }
-
-    .floating {
-      animation: float 6s ease-in-out infinite;
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-15px); }
-    }
-
-    .pulse-live {
-      animation: pulseLive 2s ease-in-out infinite;
-    }
-    @keyframes pulseLive {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    .card-hover {
-      transition: all 0.3s ease;
-    }
-    .card-hover:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-    }
-
-    .nav-link {
-      position: relative;
-    }
-    .nav-link::after {
+    .hero-section::after {
       content: '';
       position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #F5C842;
-      transition: width 0.3s ease;
-    }
-    .nav-link:hover::after,
-    .nav-link.active::after {
-      width: 100%;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M0 0h40v40H0zm40 40h40v40H40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
 
-    .section-divider {
-      width: 80px;
-      height: 4px;
-      background: linear-gradient(90deg, #F5C842, #E6B800);
-      border-radius: 2px;
+    /* ── Animations ── */
+    .float-anim { animation: floatY 7s ease-in-out infinite; }
+    @keyframes floatY {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-18px); }
+    }
+    .pulse-dot { animation: pDot 2s ease-in-out infinite; }
+    @keyframes pDot {
+      0%,100% { opacity:1; transform: scale(1); }
+      50% { opacity:.4; transform: scale(1.3); }
+    }
+    .card-lift { transition: transform .3s ease, box-shadow .3s ease; }
+    .card-lift:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(91,15,168,.2); }
+
+    .fade-up {
+      animation: fadeUp .6s ease-out forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(24px); }
+      to { opacity:1; transform:translateY(0); }
     }
 
-    .gradient-text {
-      background: linear-gradient(135deg, #F5C842, #E6B800);
+    /* ── Nav underline ── */
+    .nav-item { position: relative; }
+    .nav-item::after {
+      content:''; position:absolute; bottom:-4px; left:0;
+      width:0; height:2px; background:#F5C842;
+      transition: width .3s ease;
+    }
+    .nav-item:hover::after, .nav-item.active::after { width:100%; }
+
+    /* ── Divider ── */
+    .divider {
+      width:60px; height:4px;
+      background: linear-gradient(90deg,#F5C842,#E6A817);
+      border-radius:2px;
+    }
+
+    /* ── Gradient text ── */
+    .grad-text {
+      background: linear-gradient(135deg, #F5C842, #E6A817);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .grad-text-purple {
+      background: linear-gradient(135deg, #9D4EDD, #5B0FA8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .verse-card {
-      background: linear-gradient(135deg, #0D1B4B, #4c1d95);
-    }
+    /* ── Glass card ── */
+    .glass { background: rgba(255,255,255,.08); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,.15); }
+    .glass-dark { background: rgba(59,10,111,.6); backdrop-filter: blur(16px); border: 1px solid rgba(157,78,221,.3); }
 
-    .modal-overlay {
-      backdrop-filter: blur(4px);
-    }
+    /* ── Toast ── */
+    .toast { animation: slideIn .4s ease, fadeOut .4s ease 2.6s forwards; }
+    @keyframes slideIn { from{transform:translateX(110%); opacity:0;} to{transform:translateX(0); opacity:1;} }
+    @keyframes fadeOut { from{opacity:1;} to{opacity:0;} }
 
-    .fade-in {
-      animation: fadeIn 0.6s ease-out forwards;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* ── Modal ── */
+    .modal-bg { backdrop-filter: blur(6px); }
 
-    .shimmer {
-      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-    }
-    @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width:5px; }
+    ::-webkit-scrollbar-track { background:#1a0535; }
+    ::-webkit-scrollbar-thumb { background:#5B0FA8; border-radius:3px; }
 
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #0D1B4B; }
-    ::-webkit-scrollbar-thumb { background: #F5C842; border-radius: 3px; }
-
-    .toast {
-      animation: slideIn 0.4s ease, fadeOut 0.4s ease 2.6s forwards;
-    }
-    @keyframes slideIn {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    @keyframes fadeOut {
-      from { opacity: 1; }
-      to { opacity: 0; }
-    }
-
-    /* Particles */
+    /* ── Particles ── */
     .particle {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(245,200,66,0.15);
+      position:absolute; border-radius:50%;
+      background:rgba(157,78,221,.18);
       animation: drift linear infinite;
     }
     @keyframes drift {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(-20px) rotate(720deg); opacity: 0; }
+      0%   { transform:translateY(110vh) rotate(0deg); opacity:0; }
+      10%  { opacity:1; }
+      90%  { opacity:.8; }
+      100% { transform:translateY(-40px) rotate(720deg); opacity:0; }
+    }
+
+    /* ── Impact badge ── */
+    .impact-badge {
+      background: linear-gradient(135deg, rgba(91,15,168,.9), rgba(157,78,221,.9));
+      border: 1px solid rgba(245,200,66,.4);
+    }
+
+    /* ── Section wave ── */
+    .wave-top { margin-top:-2px; }
+
+    /* ── Tag ── */
+    .tag {
+      background: linear-gradient(135deg, rgba(91,15,168,.15), rgba(157,78,221,.15));
+      border: 1px solid rgba(157,78,221,.4);
+      color: #9D4EDD;
     }
   </style>
 </head>
 
-<body class="font-sans bg-gray-50 text-gray-800" x-cloak>
+<body class="font-sans bg-white text-gray-800" x-cloak>
 
-<!-- ===== TOAST NOTIFICATION ===== -->
-<div class="fixed top-6 right-6 z-[9999] space-y-2" x-show="toast.show" x-cloak>
-  <div class="toast flex items-center gap-3 px-5 py-3 rounded-xl shadow-2xl text-white font-medium"
-       :class="toast.type === 'success' ? 'bg-green-600' : 'bg-red-600'">
-    <i :class="toast.type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle'"></i>
+<!-- ===== TOAST ===== -->
+<div class="fixed top-6 right-6 z-[9999]" x-show="toast.show" x-cloak>
+  <div class="toast flex items-center gap-3 px-5 py-3 rounded-2xl shadow-2xl text-white font-semibold text-sm"
+       :class="toast.type==='success' ? 'bg-icc-purple' : 'bg-red-600'">
+    <i :class="toast.type==='success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle'"></i>
     <span x-text="toast.message"></span>
   </div>
 </div>
 
 <!-- ===== NAVBAR ===== -->
 <nav class="fixed top-0 w-full z-50 transition-all duration-300"
-     :class="scrolled ? 'bg-royal-900/95 backdrop-blur-md shadow-2xl py-3' : 'bg-transparent py-5'">
+     :class="scrolled ? 'bg-icc-dpurple/95 backdrop-blur-md shadow-2xl py-2' : 'bg-transparent py-4'">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
 
     <!-- Logo -->
-    <button @click="page = 'home'" class="flex items-center gap-3 group">
-      <img src="logo.png" alt="Logo Cité Bethel"
-           class="h-12 w-auto object-contain group-hover:scale-110 transition drop-shadow-lg"
-           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
-      <div class="w-10 h-10 rounded-full bg-gold-500 items-center justify-center shadow-lg group-hover:scale-110 transition hidden">
-        <i class="fas fa-cross text-royal-900 text-lg"></i>
+    <button @click="page='home'" class="flex items-center gap-3 group">
+      <img src="logo.png" alt="ICC RDC"
+           class="h-12 w-auto object-contain group-hover:scale-105 transition"
+           onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex'" />
+      <div id="logo-fallback" class="hidden w-10 h-10 rounded-full icc-grad items-center justify-center shadow-lg">
+        <span class="text-white font-black text-sm">ICC</span>
       </div>
       <div class="text-left">
-        <div class="text-white font-serif font-bold text-lg leading-none">CITÉ BETHEL</div>
-        <div class="text-gold-400 text-xs font-light tracking-widest">ÉGLISE ASSEMBLÉE CENTRALE</div>
+        <div class="text-white font-black text-base leading-none tracking-wide">IMPACT CENTRE</div>
+        <div class="text-gold-400 text-xs font-semibold tracking-[.2em]">CHRÉTIEN RDC</div>
       </div>
     </button>
 
-    <!-- Desktop Nav -->
-    <div class="hidden md:flex items-center gap-8">
+    <!-- Desktop -->
+    <div class="hidden md:flex items-center gap-7">
       <template x-for="link in navLinks" :key="link.id">
-        <button @click="page = link.id"
-                class="nav-link text-white text-sm font-medium transition hover:text-gold-400"
-                :class="page === link.id ? 'text-gold-400 active' : ''"
+        <button @click="page=link.id"
+                class="nav-item text-white text-sm font-semibold transition hover:text-gold-400"
+                :class="page===link.id ? 'text-gold-400 active' : ''"
                 x-text="link.label"></button>
       </template>
-      <button @click="page = isAdmin ? 'admin' : 'login'"
-              class="nav-link text-white text-sm font-medium transition hover:text-gold-400"
-              :class="(page === 'admin' || page === 'login') ? 'text-gold-400 active' : ''">
-        <i class="fas fa-lock mr-1"></i> Admin
+      <button @click="page=isAdmin?'admin':'login'"
+              class="nav-item text-white text-sm font-semibold transition hover:text-gold-400"
+              :class="(page==='admin'||page==='login') ? 'text-gold-400 active' : ''">
+        <i class="fas fa-lock mr-1 text-xs"></i> Admin
       </button>
-      <button @click="page = 'contact'"
-              class="bg-gold-500 hover:bg-gold-600 text-royal-900 font-bold text-sm py-2 px-5 rounded-full transition hover:scale-105 shadow-lg">
-        <i class="fas fa-church mr-1"></i> Rejoindre
+      <button @click="page='contact'"
+              class="icc-grad hover:opacity-90 text-white font-bold text-sm py-2.5 px-6 rounded-full transition hover:scale-105 shadow-lg">
+        <i class="fas fa-heart mr-1"></i> Nous rejoindre
       </button>
     </div>
 
-    <!-- Mobile Burger -->
-    <button @click="mobileMenu = !mobileMenu" class="md:hidden text-white text-2xl">
+    <!-- Burger -->
+    <button @click="mobileMenu=!mobileMenu" class="md:hidden text-white text-2xl">
       <i :class="mobileMenu ? 'fas fa-times' : 'fas fa-bars'"></i>
     </button>
   </div>
 
   <!-- Mobile Menu -->
-  <div x-show="mobileMenu" x-transition class="md:hidden bg-royal-900/98 backdrop-blur-md border-t border-white/10">
+  <div x-show="mobileMenu" x-transition class="md:hidden bg-icc-dpurple/98 backdrop-blur-md border-t border-white/10">
     <div class="px-4 py-4 space-y-1">
       <template x-for="link in navLinks" :key="link.id">
-        <button @click="page = link.id; mobileMenu = false"
-                class="w-full text-left px-4 py-3 rounded-lg text-white hover:bg-white/10 transition font-medium"
-                :class="page === link.id ? 'bg-white/10 text-gold-400' : ''"
+        <button @click="page=link.id; mobileMenu=false"
+                class="w-full text-left px-4 py-3 rounded-xl text-white hover:bg-white/10 transition font-semibold text-sm"
+                :class="page===link.id ? 'bg-white/10 text-gold-400' : ''"
                 x-text="link.label"></button>
       </template>
-      <button @click="page = isAdmin ? 'admin' : 'login'; mobileMenu = false"
-              class="w-full text-left px-4 py-3 rounded-lg text-white hover:bg-white/10 transition font-medium">
+      <button @click="page=isAdmin?'admin':'login'; mobileMenu=false"
+              class="w-full text-left px-4 py-3 rounded-xl text-white hover:bg-white/10 transition font-semibold text-sm">
         <i class="fas fa-lock mr-2"></i> Admin
       </button>
-      <button @click="page = 'contact'; mobileMenu = false"
-              class="w-full text-left px-4 py-3 rounded-lg bg-gold-500 text-royal-900 font-bold transition">
-        <i class="fas fa-church mr-2"></i> Rejoindre
+      <button @click="page='contact'; mobileMenu=false"
+              class="w-full text-left px-4 py-3 rounded-xl icc-grad text-white font-bold text-sm mt-2">
+        <i class="fas fa-heart mr-2"></i> Nous rejoindre
       </button>
     </div>
   </div>
 </nav>
 
-<!-- ===== PAGES ===== -->
 <main>
 
-  <!-- ==================== HOME ==================== -->
-  <div x-show="page === 'home'" x-transition:enter="fade-in">
+<!-- ==================== HOME ==================== -->
+<div x-show="page==='home'" class="fade-up">
 
-    <!-- HERO -->
-    <section class="hero-bg min-h-screen flex items-center relative overflow-hidden">
-      <!-- Floating particles -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <template x-for="p in particles" :key="p.id">
-          <div class="particle"
-               :style="`width:${p.size}px;height:${p.size}px;left:${p.x}%;animation-duration:${p.dur}s;animation-delay:${p.delay}s`"></div>
-        </template>
-      </div>
+  <!-- HERO -->
+  <section class="hero-section min-h-screen flex items-center relative">
+    <!-- Particles -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <template x-for="p in particles" :key="p.id">
+        <div class="particle" :style="`width:${p.size}px;height:${p.size}px;left:${p.x}%;animation-duration:${p.dur}s;animation-delay:${p.delay}s`"></div>
+      </template>
+      <!-- Decorative circles -->
+      <div class="absolute top-20 right-10 w-72 h-72 rounded-full bg-icc-xpurple/10 blur-3xl"></div>
+      <div class="absolute bottom-20 left-10 w-96 h-96 rounded-full bg-icc-purple/15 blur-3xl"></div>
+    </div>
 
-      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-28 pb-20 text-center">
-        <div class="floating inline-block mb-6">
-          <div class="mx-auto rounded-full bg-white/10 backdrop-blur border border-gold-400/30 p-3 shadow-2xl inline-flex items-center justify-center">
-            <img src="logo.png" alt="Cité Bethel" class="h-20 w-20 object-contain"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" />
-            <i class="fas fa-cross text-gold-400 text-4xl hidden"></i>
-          </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-28 pb-24 grid md:grid-cols-2 gap-12 items-center">
+
+      <!-- Left: Text -->
+      <div>
+        <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-6">
+          <i class="fas fa-map-marker-alt text-gold-400 text-xs"></i>
+          <span class="text-white/80 text-xs font-semibold tracking-wide">Kasa-Vubu, Kinshasa — RDC</span>
         </div>
 
-        <div class="inline-block bg-gold-500/20 border border-gold-400/40 rounded-full px-5 py-1.5 text-gold-400 text-sm font-medium mb-6 backdrop-blur">
-          <i class="fas fa-map-marker-alt mr-2"></i> Kinshasa, République Démocratique du Congo
-        </div>
-
-        <h1 class="font-serif text-6xl md:text-8xl font-black text-white mb-4 leading-tight drop-shadow-2xl">
-          CITÉ <span class="gradient-text">BETHEL</span>
+        <h1 class="font-black text-5xl md:text-7xl text-white leading-none mb-4 uppercase tracking-tight">
+          IMPACT<br/>
+          <span class="grad-text">CENTRE</span><br/>
+          <span class="text-white/90">CHRÉTIEN</span>
         </h1>
-        <p class="text-2xl md:text-3xl text-white/80 mb-4 font-serif italic">« C'est ici la maison de Dieu »</p>
-        <p class="text-white/60 text-lg mb-10 max-w-2xl mx-auto">Église Assemblée Centrale — Pasteur Moïse Mbiye<br/>1 190 assemblées à travers la RDC et le monde entier</p>
+
+        <p class="text-white/70 text-lg mb-4 font-light leading-relaxed max-w-lg">
+          Sous la direction des Pasteurs <strong class="text-white font-bold">Ghislain & Rossy Biabatantou</strong> — une communauté vivante, engagée, qui transforme Kinshasa pour Christ.
+        </p>
 
         <!-- Live badge -->
-        <div x-show="hasLiveStream()" class="mb-8">
-          <div class="inline-flex items-center gap-2 bg-red-600/90 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg animate-bounce">
-            <div class="w-2.5 h-2.5 bg-white rounded-full pulse-live"></div>
-            CULTE EN DIRECT MAINTENANT
+        <div x-show="hasLive()" class="mb-6">
+          <span class="inline-flex items-center gap-2 bg-red-600 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg animate-bounce">
+            <span class="w-2 h-2 bg-white rounded-full pulse-dot"></span> CULTE EN DIRECT
+          </span>
+        </div>
+
+        <div class="flex flex-wrap gap-4 mb-10">
+          <button @click="page='cultes'"
+                  class="icc-grad hover:opacity-90 text-white font-bold py-3.5 px-8 rounded-full text-sm transition hover:scale-105 shadow-2xl">
+            <i class="fas fa-video mr-2"></i> Voir nos cultes
+          </button>
+          <button @click="page='agenda'"
+                  class="glass hover:bg-white/15 text-white font-bold py-3.5 px-8 rounded-full text-sm transition hover:scale-105">
+            <i class="fas fa-calendar mr-2"></i> Agenda
+          </button>
+        </div>
+
+        <!-- Social links -->
+        <div class="flex items-center gap-4">
+          <span class="text-white/40 text-xs font-semibold tracking-widest">SUIVEZ-NOUS</span>
+          <div class="flex gap-3">
+            <a href="https://www.instagram.com/icc_kinshasa/" target="_blank"
+               class="w-9 h-9 glass rounded-full flex items-center justify-center text-white hover:text-gold-400 transition hover:scale-110">
+              <i class="fab fa-instagram text-sm"></i>
+            </a>
+            <a href="https://www.facebook.com/icckin/" target="_blank"
+               class="w-9 h-9 glass rounded-full flex items-center justify-center text-white hover:text-gold-400 transition hover:scale-110">
+              <i class="fab fa-facebook-f text-sm"></i>
+            </a>
+            <a href="https://www.youtube.com/@ghislainbiabatantoutv" target="_blank"
+               class="w-9 h-9 glass rounded-full flex items-center justify-center text-white hover:text-gold-400 transition hover:scale-110">
+              <i class="fab fa-youtube text-sm"></i>
+            </a>
           </div>
         </div>
+      </div>
 
-        <!-- CTA Buttons -->
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <button @click="page = 'cultes'"
-                  class="bg-gold-500 hover:bg-gold-600 text-royal-900 font-bold py-4 px-8 rounded-full text-lg transition hover:scale-105 shadow-2xl">
-            <i class="fas fa-video mr-2"></i> Voir les cultes en direct
-          </button>
-          <button @click="page = 'agenda'"
-                  class="bg-white/10 hover:bg-white/20 backdrop-blur border border-white/30 text-white font-bold py-4 px-8 rounded-full text-lg transition hover:scale-105">
-            <i class="fas fa-calendar mr-2"></i> Agenda des événements
-          </button>
-        </div>
-
-        <!-- Scroll indicator -->
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 text-sm animate-bounce">
-          <i class="fas fa-chevron-down"></i>
+      <!-- Right: Visual card -->
+      <div class="float-anim hidden md:block">
+        <div class="glass-dark rounded-3xl p-8 text-center shadow-2xl">
+          <img src="logo.png" alt="ICC RDC"
+               class="h-32 mx-auto mb-6 object-contain"
+               onerror="this.style.display='none'" />
+          <div class="text-white font-black text-2xl mb-1">ICC RDC</div>
+          <div class="text-gold-400 text-sm font-semibold mb-6 tracking-widest">KINSHASA — RDC 🇨🇩</div>
+          <div class="space-y-3">
+            <template x-for="s in serviceTimes" :key="s.day">
+              <div class="flex items-center justify-between bg-white/10 rounded-xl px-4 py-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 bg-gold-400 rounded-full pulse-dot"></div>
+                  <span class="text-white font-semibold text-sm" x-text="s.day"></span>
+                </div>
+                <span class="text-gold-400 font-black" x-text="s.time"></span>
+              </div>
+            </template>
+          </div>
+          <div class="mt-5 pt-5 border-t border-white/10">
+            <p class="text-white/60 text-xs"><i class="fas fa-map-marker-alt text-gold-400 mr-1"></i> Av. de la Libération, Kasa-Vubu</p>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- SERVICE TIMES -->
-    <section class="bg-royal-900 py-8">
-      <div class="max-w-5xl mx-auto px-4 grid grid-cols-3 md:grid-cols-3 divide-x divide-white/10">
-        <template x-for="s in serviceTimes" :key="s.time">
-          <div class="text-center py-4 px-6">
-            <div class="text-gold-400 font-bold text-xl md:text-2xl" x-text="s.time"></div>
-            <div class="text-white/60 text-xs md:text-sm mt-1" x-text="s.label"></div>
+    <!-- Wave -->
+    <div class="absolute bottom-0 left-0 w-full wave-top">
+      <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-16">
+        <path d="M0 40 C360 80 1080 0 1440 40 L1440 80 L0 80 Z" fill="white"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- SERVICE TIMES BANNER -->
+  <section class="bg-white py-10">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="icc-grad rounded-2xl p-6 grid grid-cols-2 divide-x divide-white/20 shadow-xl">
+        <template x-for="s in serviceTimes" :key="s.day">
+          <div class="text-center py-2 px-6">
+            <div class="text-white/70 text-xs font-bold tracking-widest uppercase" x-text="s.day"></div>
+            <div class="text-gold-400 font-black text-3xl mt-1" x-text="s.time"></div>
+            <div class="text-white/60 text-xs mt-1" x-text="s.label"></div>
           </div>
         </template>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- MISSION -->
-    <section class="py-24 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="text-center mb-16">
-          <div class="section-divider mx-auto mb-4"></div>
-          <h2 class="font-serif text-4xl md:text-5xl font-bold text-royal-900 mb-4">Notre Vision & Mission</h2>
-          <p class="text-gray-500 max-w-2xl mx-auto">Bâtir une communauté de foi transformée par la Parole de Dieu et l'amour du prochain.</p>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-          <template x-for="mission in missions" :key="mission.title">
-            <div class="card-hover bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 border border-gray-100 shadow-sm text-center">
-              <div class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-6 shadow-lg"
-                   :class="mission.bg">
-                <i :class="'text-white text-2xl ' + mission.icon"></i>
-              </div>
-              <h3 class="font-serif text-xl font-bold text-royal-900 mb-3" x-text="mission.title"></h3>
-              <p class="text-gray-500 text-sm leading-relaxed" x-text="mission.desc"></p>
+  <!-- VISION -->
+  <section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <div class="divider mx-auto mb-4"></div>
+        <h2 class="font-black text-4xl md:text-5xl text-gray-900 mb-4 uppercase tracking-tight">
+          Notre <span class="grad-text-purple">Vision</span>
+        </h2>
+        <p class="text-gray-500 max-w-2xl mx-auto">Impacter chaque vie, chaque famille, chaque quartier de Kinshasa et au-delà — pour la gloire de Dieu.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <template x-for="v in visions" :key="v.title">
+          <div class="card-lift rounded-2xl p-8 border border-gray-100 shadow-sm bg-gradient-to-br from-white to-gray-50 text-center group">
+            <div class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-6 shadow-lg icc-grad group-hover:scale-110 transition">
+              <i :class="'text-white text-2xl ' + v.icon"></i>
             </div>
-          </template>
+            <h3 class="font-black text-gray-900 text-lg mb-3 uppercase tracking-wide" x-text="v.title"></h3>
+            <p class="text-gray-500 text-sm leading-relaxed" x-text="v.desc"></p>
+          </div>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- PASTEURS -->
+  <section class="py-24 icc-grad-dark relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 right-0 w-96 h-96 rounded-full bg-icc-xpurple blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 w-72 h-72 rounded-full bg-gold-500 blur-3xl opacity-30"></div>
+    </div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="text-center mb-16">
+        <div class="divider mx-auto mb-4"></div>
+        <h2 class="font-black text-4xl md:text-5xl text-white mb-4 uppercase tracking-tight">
+          Nos <span class="grad-text">Pasteurs</span>
+        </h2>
+        <p class="text-white/60 max-w-xl mx-auto">Des serviteurs de Dieu passionnés, au cœur de la jeunesse de Kinshasa</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+        <!-- Photo -->
+        <div class="space-y-6">
+          <div class="relative rounded-3xl overflow-hidden border-4 border-gold-400/30 shadow-2xl aspect-[4/5] bg-gradient-to-br from-icc-purple to-icc-dpurple flex items-center justify-center">
+            <img src="pastor.jpg" alt="Pasteurs Ghislain & Rossy Biabatantou"
+                 class="w-full h-full object-cover object-top"
+                 onerror="this.style.display='none'" />
+            <div class="absolute inset-0 bg-gradient-to-t from-icc-dpurple/80 via-transparent to-transparent"></div>
+            <div class="absolute bottom-6 left-0 right-0 text-center">
+              <div class="inline-block glass rounded-2xl px-6 py-3">
+                <p class="text-white font-black text-lg">Pst. Ghislain & Rossy</p>
+                <p class="text-gold-400 text-sm font-semibold">BIABATANTOU</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-3">
+            <template x-for="stat in stats" :key="stat.label">
+              <div class="glass-dark rounded-2xl p-4 text-center card-lift">
+                <div class="text-gold-400 font-black text-xl" x-text="stat.value"></div>
+                <div class="text-white/60 text-xs mt-1" x-text="stat.label"></div>
+              </div>
+            </template>
+          </div>
+        </div>
+
+        <!-- Bio -->
+        <div>
+          <div class="glass-dark rounded-2xl p-8 mb-6">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 icc-grad rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                <i class="fas fa-user-tie text-white"></i>
+              </div>
+              <div>
+                <h3 class="text-white font-black text-xl">Pasteur Ghislain Biabatantou</h3>
+                <p class="text-gold-400 text-sm font-semibold">Représentant Légal ICC RDC</p>
+              </div>
+            </div>
+            <div class="space-y-4 text-white/70 text-sm leading-relaxed">
+              <p>Disciple depuis plus de <strong class="text-white">20 ans</strong> auprès de l'Apôtre Yvan Castanou (fondateur d'ICC), Ghislain Biabatantou est ordonné pasteur en <strong class="text-white">2010</strong>.</p>
+              <p>Il dirige pendant près de <strong class="text-white">10 ans</strong> les églises ICC à Pointe-Noire (République du Congo), avant de répondre à l'appel de son père spirituel en <strong class="text-white">2021</strong> pour venir à Kinshasa.</p>
+              <p>Connu comme le <strong class="text-gold-400">"Pasteur des Jeunes de Kinshasa"</strong>, il est prédicateur, auteur, coach et motivateur, engagé dans l'évangélisation massive à travers le mouvement <strong class="text-gold-400">MBONGWANA TOUR</strong>.</p>
+              <p>Aux côtés de son épouse, la <strong class="text-white">Pasteure Rossy Biabatantou</strong>, il œuvre pour un renouvellement profond des mentalités et la transformation des familles congolaises.</p>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-2 mb-6">
+            <template x-for="tag in pastorTags" :key="tag">
+              <span class="bg-icc-purple/20 border border-icc-xpurple/40 text-icc-xpurple text-xs px-3 py-1.5 rounded-full font-semibold" x-text="tag"></span>
+            </template>
+          </div>
+
+          <!-- Quote -->
+          <div class="glass-dark rounded-2xl p-6 border-l-4 border-gold-400">
+            <i class="fas fa-quote-left text-gold-400 text-xl mb-3 block"></i>
+            <p class="text-white italic text-lg font-serif">"Notre mission est d'impacter chaque vie, chaque famille, chaque communauté pour la gloire de Dieu."</p>
+            <p class="text-gold-400 text-sm font-semibold mt-3">— Pasteur Ghislain Biabatantou</p>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- PASTOR -->
-    <section class="py-24 hero-bg relative overflow-hidden">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <div class="section-divider mb-6"></div>
-            <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-6">Pasteur<br/><span class="gradient-text">Moïse Mbiye</span></h2>
-            <p class="text-white/70 mb-4 leading-relaxed">Né le <strong class="text-white">9 septembre 1980</strong> à Matete, Kinshasa, Moïse Mbiye est le 5ème de 9 enfants. Son père, le Pasteur Emmanuel Mbiye Mulaya, est le fondateur de Cité Bethel.</p>
-            <p class="text-white/70 mb-4 leading-relaxed">Musicien depuis l'enfance, il rejoint à 10 ans le Groupe d'Adoration Junior, apprend le piano et la guitare à 13 ans, puis intègre à 17 ans <em>Les Étoiles de Louange</em>. Le 24 juillet 2011, il devient pasteur principal de l'Assemblée Centrale Cité Bethel.</p>
-            <p class="text-white/70 mb-6 leading-relaxed">Depuis le rappel à Dieu de son père le 30 août 2021, il est le <strong class="text-gold-400">Représentant Légal</strong> de la Communauté Cité Bethel, qui compte aujourd'hui <strong class="text-gold-400">1 190 assemblées</strong> à travers la RDC et le monde.</p>
-
-            <!-- Albums -->
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="text-white/50 text-xs font-semibold uppercase tracking-widest w-full mb-1">Discographie</span>
-              <template x-for="album in albums" :key="album">
-                <span class="bg-white/10 border border-gold-400/30 text-gold-400 text-xs px-3 py-1.5 rounded-full font-medium" x-text="album"></span>
-              </template>
-            </div>
-
-            <div class="verse-card rounded-2xl p-6 border border-gold-400/30">
-              <i class="fas fa-quote-left text-gold-400 text-2xl mb-3"></i>
-              <p class="text-white italic text-lg font-serif">"L'église Cité Bethel représente ma vie"</p>
-              <p class="text-gold-400 text-sm mt-3">— Pasteur Moïse Mbiye</p>
-            </div>
-          </div>
-
-          <!-- Photo + Stats -->
-          <div class="space-y-6">
-            <!-- Pastor photo -->
-            <div class="relative mx-auto w-64 md:w-full">
-              <div class="rounded-3xl overflow-hidden border-4 border-gold-400/40 shadow-2xl aspect-[3/4] bg-gradient-to-br from-royal-800 to-purple-900 flex items-center justify-center">
-                <img src="pastor.jpg" alt="Pasteur Moïse Mbiye"
-                     class="w-full h-full object-cover object-top"
-                     onerror="this.style.display='none'" />
-                <i class="fas fa-user text-white/20 text-6xl" id="pastor-placeholder"></i>
-              </div>
-              <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-gold-500 text-royal-900 font-bold text-sm px-6 py-2 rounded-full shadow-xl whitespace-nowrap">
-                <i class="fas fa-cross mr-1"></i> Pasteur Moïse Mbiye
-              </div>
-            </div>
-
-            <!-- Stats grid -->
-            <div class="grid grid-cols-2 gap-3 pt-6">
-              <template x-for="stat in stats" :key="stat.label">
-                <div class="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-5 text-center card-hover">
-                  <div class="text-gold-400 text-2xl font-black font-serif" x-text="stat.value"></div>
-                  <div class="text-white/70 text-xs mt-1" x-text="stat.label"></div>
-                </div>
-              </template>
-            </div>
-          </div>
+  <!-- MBONGWANA -->
+  <section class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 text-center">
+      <div class="icc-grad rounded-3xl p-12 shadow-2xl relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+          <div class="absolute top-0 right-0 w-64 h-64 rounded-full bg-gold-400 blur-3xl"></div>
         </div>
-      </div>
-    </section>
-
-    <!-- NEWS -->
-    <section class="py-24 bg-gray-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="flex justify-between items-end mb-12">
-          <div>
-            <div class="section-divider mb-4"></div>
-            <h2 class="font-serif text-4xl font-bold text-royal-900">Actualités</h2>
-          </div>
-          <button @click="page = 'news'" class="text-royal-800 font-semibold text-sm hover:text-gold-500 transition">
-            Tout voir <i class="fas fa-arrow-right ml-1"></i>
+        <div class="relative z-10">
+          <span class="inline-block bg-gold-400/20 border border-gold-400/40 text-gold-400 text-xs font-black px-4 py-1.5 rounded-full mb-4 tracking-widest uppercase">Mouvement d'évangélisation</span>
+          <h2 class="font-black text-5xl text-white mb-4 uppercase tracking-tight">MBONGWANA</h2>
+          <p class="text-white/80 text-lg max-w-2xl mx-auto mb-8">Le mouvement <strong class="text-gold-400">MBONGWANA TOUR</strong> représente l'aile évangélique d'ICC RDC — des campagnes massives d'évangélisation qui transforment des milliers de vies à travers toute la RDC.</p>
+          <button @click="page='agenda'"
+                  class="bg-gold-400 hover:bg-gold-500 text-gray-900 font-black py-3.5 px-8 rounded-full transition hover:scale-105 shadow-xl text-sm uppercase tracking-wide">
+            <i class="fas fa-fire mr-2"></i> Prochains événements
           </button>
         </div>
-        <div class="grid md:grid-cols-3 gap-8">
-          <template x-for="article in news.slice(0,3)" :key="article.id">
-            <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-              <div class="h-48 bg-gradient-to-br from-royal-800 to-purple-900 flex items-center justify-center relative overflow-hidden">
-                <i class="fas fa-church text-white/20 text-7xl absolute"></i>
-                <img x-show="article.image" :src="article.image" :alt="article.title"
-                     class="w-full h-full object-cover absolute inset-0" @error="$event.target.style.display='none'" />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <span class="absolute bottom-3 left-4 bg-gold-500 text-royal-900 text-xs font-bold px-3 py-1 rounded-full" x-text="article.category || 'Actualité'"></span>
-              </div>
-              <div class="p-6">
-                <p class="text-gold-500 text-xs font-semibold mb-2 flex items-center gap-1">
-                  <i class="fas fa-calendar-alt"></i> <span x-text="formatDate(article.date)"></span>
-                </p>
-                <h3 class="font-serif font-bold text-royal-900 text-lg mb-2 line-clamp-2" x-text="article.title"></h3>
-                <p class="text-gray-500 text-sm line-clamp-3" x-text="article.content"></p>
-              </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex justify-between items-end mb-12">
+        <div>
+          <div class="divider mb-4"></div>
+          <h2 class="font-black text-4xl text-gray-900 uppercase tracking-tight">Actualités</h2>
+        </div>
+        <button @click="page='news'" class="text-icc-purple font-bold text-sm hover:text-icc-xpurple transition">
+          Tout voir <i class="fas fa-arrow-right ml-1"></i>
+        </button>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <template x-for="article in news.slice(0,3)" :key="article.id">
+          <div class="card-lift bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+            <div class="h-48 icc-grad-dark flex items-center justify-center relative overflow-hidden">
+              <i class="fas fa-cross text-white/10 text-7xl absolute"></i>
+              <img x-show="article.image" :src="article.image" :alt="article.title"
+                   class="w-full h-full object-cover absolute inset-0" @error="$event.target.style.display='none'" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <span class="absolute bottom-3 left-4 icc-grad text-white text-xs font-bold px-3 py-1 rounded-full" x-text="article.category||'Actualité'"></span>
             </div>
-          </template>
+            <div class="p-6">
+              <p class="text-icc-purple text-xs font-bold mb-2 flex items-center gap-1">
+                <i class="fas fa-calendar-alt"></i> <span x-text="formatDate(article.date)"></span>
+              </p>
+              <h3 class="font-black text-gray-900 text-base mb-2 line-clamp-2 uppercase tracking-wide" x-text="article.title"></h3>
+              <p class="text-gray-500 text-sm line-clamp-3" x-text="article.content"></p>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERSE -->
+  <section class="py-16 icc-grad text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <i class="fas fa-bible text-gold-400 text-3xl mb-6 block"></i>
+      <p class="font-serif text-2xl md:text-4xl italic mb-4" x-text="verse.text"></p>
+      <p class="text-gold-400 font-bold tracking-widest" x-text="verse.ref"></p>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="py-20 bg-white">
+    <div class="max-w-2xl mx-auto px-4 text-center">
+      <div class="divider mx-auto mb-6"></div>
+      <h2 class="font-black text-3xl text-gray-900 mb-4 uppercase tracking-tight">Restez connecté</h2>
+      <p class="text-gray-500 mb-8 text-sm">Recevez chaque semaine les messages, événements et nouvelles d'ICC RDC directement dans votre boîte mail.</p>
+      <form @submit.prevent="subscribeNewsletter()" class="flex gap-3 max-w-md mx-auto">
+        <input type="email" x-model="newsletterEmail" placeholder="Votre email"
+               class="flex-1 px-5 py-3.5 rounded-full border-2 border-gray-200 focus:border-icc-purple outline-none text-sm transition" required />
+        <button type="submit"
+                class="icc-grad text-white font-bold px-6 py-3.5 rounded-full transition hover:scale-105 whitespace-nowrap text-sm shadow-lg">
+          S'inscrire
+        </button>
+      </form>
+    </div>
+  </section>
+
+</div>
+
+<!-- ==================== CULTES / MESSAGES ==================== -->
+<div x-show="page==='cultes'" class="fade-up pt-24 min-h-screen icc-grad-dark pb-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-16">
+      <div class="divider mx-auto mb-4"></div>
+      <h1 class="font-black text-5xl text-white uppercase tracking-tight mb-4">
+        Messages & <span class="grad-text">Cultes</span>
+      </h1>
+      <p class="text-white/60 max-w-xl mx-auto">Retrouvez nos cultes en direct et l'archive de nos messages</p>
+    </div>
+
+    <!-- Live Streams -->
+    <div class="grid md:grid-cols-2 gap-6 mb-16">
+      <template x-for="stream in liveStreams" :key="stream.id">
+        <div class="card-lift glass-dark rounded-2xl overflow-hidden">
+          <div class="p-6 border-b border-white/10">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full" :class="stream.isLive ? 'bg-red-500 pulse-dot' : 'bg-gray-500'"></span>
+                <span class="text-white text-xs font-black tracking-widest" x-text="stream.isLive ? 'EN DIRECT' : 'PROGRAMMÉ'"></span>
+              </div>
+              <span class="icc-grad text-white text-xs font-bold px-3 py-1 rounded-full" x-text="stream.schedule.split(' ').pop()"></span>
+            </div>
+            <i class="fas fa-video text-white/20 text-3xl mb-2 block"></i>
+            <h3 class="text-white font-black text-lg uppercase" x-text="stream.title"></h3>
+            <p class="text-white/50 text-sm mt-1" x-text="stream.schedule"></p>
+          </div>
+          <div class="p-5">
+            <button @click="openStream(stream)"
+                    class="w-full py-3 rounded-xl font-black text-sm transition uppercase tracking-wide"
+                    :class="stream.isLive ? 'bg-red-600 hover:bg-red-700 text-white' : 'icc-grad text-white hover:opacity-90'">
+              <i class="fas" :class="stream.isLive ? 'fa-circle text-xs mr-1' : 'fa-play mr-1'"></i>
+              <span x-text="stream.isLive ? 'Rejoindre maintenant' : 'Regarder'"></span>
+            </button>
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <!-- Stream modal -->
+    <div x-show="activeStream" x-cloak
+         class="fixed inset-0 z-[100] flex items-center justify-center modal-bg bg-black/85"
+         @click.self="activeStream=null">
+      <div class="w-full max-w-4xl mx-4 icc-grad-dark rounded-2xl overflow-hidden shadow-2xl border border-icc-purple/30">
+        <div class="flex justify-between items-center p-5 border-b border-white/10">
+          <div>
+            <h3 class="text-white font-black" x-text="activeStream?.title"></h3>
+            <p class="text-gold-400 text-sm" x-text="activeStream?.schedule"></p>
+          </div>
+          <button @click="activeStream=null" class="text-white/60 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="aspect-video bg-black">
+          <iframe x-show="activeStream"
+                  :src="'https://www.youtube.com/embed/'+(activeStream?.youtubeId||'')+'?autoplay=1'"
+                  class="w-full h-full" frameborder="0" allowfullscreen allow="autoplay"></iframe>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- VERSE OF THE DAY -->
-    <section class="py-16 verse-card text-white text-center">
-      <div class="max-w-4xl mx-auto px-4">
-        <i class="fas fa-bible text-gold-400 text-3xl mb-6"></i>
-        <p class="font-serif text-2xl md:text-3xl italic mb-4" x-text="verseOfDay.text"></p>
-        <p class="text-gold-400 font-bold" x-text="verseOfDay.ref"></p>
+    <!-- Messages archive -->
+    <div>
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="font-black text-3xl text-white uppercase tracking-tight">Messages récents</h2>
+        <div class="flex gap-2">
+          <button @click="sermonFilter='all'" class="px-4 py-2 rounded-full text-xs font-bold transition uppercase tracking-wide"
+                  :class="sermonFilter==='all' ? 'bg-gold-400 text-gray-900' : 'glass text-white hover:bg-white/20'">Tous</button>
+          <button @click="sermonFilter='predication'" class="px-4 py-2 rounded-full text-xs font-bold transition uppercase tracking-wide"
+                  :class="sermonFilter==='predication' ? 'bg-gold-400 text-gray-900' : 'glass text-white hover:bg-white/20'">Prédications</button>
+          <button @click="sermonFilter='louange'" class="px-4 py-2 rounded-full text-xs font-bold transition uppercase tracking-wide"
+                  :class="sermonFilter==='louange' ? 'bg-gold-400 text-gray-900' : 'glass text-white hover:bg-white/20'">Louange</button>
+        </div>
       </div>
-    </section>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <template x-for="video in filteredVideos()" :key="video.id">
+          <div class="card-lift glass-dark rounded-2xl overflow-hidden group">
+            <div class="relative aspect-video bg-black/50">
+              <img :src="'https://img.youtube.com/vi/'+video.youtubeId+'/hqdefault.jpg'" :alt="video.title"
+                   class="w-full h-full object-cover opacity-80" />
+              <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition">
+                <button @click="playVideo(video)"
+                        class="w-14 h-14 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center shadow-2xl transition hover:scale-110">
+                  <i class="fas fa-play text-white text-lg ml-1"></i>
+                </button>
+              </div>
+              <span class="absolute top-3 right-3 icc-grad text-white text-xs font-bold px-2 py-1 rounded-full" x-text="video.type||'Message'"></span>
+            </div>
+            <div class="p-5">
+              <p class="text-gold-400 text-xs font-bold mb-1"><i class="fas fa-calendar mr-1"></i> <span x-text="formatDate(video.date)"></span></p>
+              <h3 class="text-white font-black text-sm mb-1 line-clamp-2 uppercase" x-text="video.title"></h3>
+              <p class="text-white/50 text-xs" x-text="video.preacher||'Pst Ghislain Biabatantou'"></p>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
 
-    <!-- NEWSLETTER -->
-    <section class="py-20 bg-white">
-      <div class="max-w-2xl mx-auto px-4 text-center">
-        <div class="section-divider mx-auto mb-6"></div>
-        <h2 class="font-serif text-3xl font-bold text-royal-900 mb-4">Restez connecté</h2>
-        <p class="text-gray-500 mb-8">Recevez les dernières nouvelles, sermons et événements directement dans votre boîte mail.</p>
-        <form @submit.prevent="subscribeNewsletter()" class="flex gap-3 max-w-md mx-auto">
-          <input type="email" x-model="newsletterEmail" placeholder="Votre adresse email"
-                 class="flex-1 px-5 py-3 rounded-full border-2 border-gray-200 focus:border-gold-400 outline-none text-sm transition" required />
+    <!-- Video modal -->
+    <div x-show="activeVideo" x-cloak
+         class="fixed inset-0 z-[100] flex items-center justify-center modal-bg bg-black/85"
+         @click.self="activeVideo=null">
+      <div class="w-full max-w-4xl mx-4 icc-grad-dark rounded-2xl overflow-hidden shadow-2xl border border-icc-purple/30">
+        <div class="flex justify-between items-center p-5 border-b border-white/10">
+          <h3 class="text-white font-black text-sm" x-text="activeVideo?.title"></h3>
+          <button @click="activeVideo=null" class="text-white/60 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="aspect-video bg-black">
+          <iframe x-show="activeVideo" :src="'https://www.youtube.com/embed/'+activeVideo?.youtubeId+'?autoplay=1'"
+                  class="w-full h-full" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== NEWS ==================== -->
+<div x-show="page==='news'" class="fade-up pt-24 min-h-screen bg-gray-50 pb-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-16">
+      <div class="divider mx-auto mb-4"></div>
+      <h1 class="font-black text-5xl text-gray-900 uppercase tracking-tight mb-4">
+        Actualités <span class="grad-text-purple">&</span> Annonces
+      </h1>
+      <p class="text-gray-500 max-w-xl mx-auto">Toutes les nouvelles de la communauté ICC RDC</p>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 mb-10">
+      <div class="relative flex-1">
+        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+        <input type="text" x-model="newsSearch" placeholder="Rechercher..."
+               class="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm" />
+      </div>
+      <select x-model="newsCategory"
+              class="px-5 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm bg-white">
+        <option value="all">Toutes catégories</option>
+        <option value="Actualité">Actualité</option>
+        <option value="Événement">Événement</option>
+        <option value="Annonce">Annonce</option>
+        <option value="Impact">Impact</option>
+      </select>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <template x-for="article in filteredNews()" :key="article.id">
+        <div class="card-lift bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+          <div class="h-52 icc-grad-dark relative overflow-hidden flex items-center justify-center">
+            <i class="fas fa-cross text-white/10 text-8xl absolute"></i>
+            <img x-show="article.image" :src="article.image" :alt="article.title"
+                 class="w-full h-full object-cover absolute inset-0" @error="$event.target.style.display='none'" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+            <div class="absolute bottom-3 left-4 right-4 flex justify-between items-center">
+              <span class="icc-grad text-white text-xs font-bold px-3 py-1 rounded-full" x-text="article.category||'Actualité'"></span>
+              <span class="text-white/70 text-xs" x-text="formatDate(article.date)"></span>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-black text-gray-900 text-base mb-3 line-clamp-2 uppercase tracking-wide" x-text="article.title"></h3>
+            <p class="text-gray-500 text-sm leading-relaxed line-clamp-4" x-text="article.content"></p>
+            <button class="mt-4 text-icc-purple text-sm font-bold hover:text-icc-xpurple transition">
+              Lire la suite <i class="fas fa-arrow-right ml-1"></i>
+            </button>
+          </div>
+        </div>
+      </template>
+    </div>
+    <div x-show="filteredNews().length===0" class="text-center py-16 text-gray-400">
+      <i class="fas fa-search text-4xl mb-4 block"></i> Aucun article trouvé.
+    </div>
+  </div>
+</div>
+
+<!-- ==================== AGENDA ==================== -->
+<div x-show="page==='agenda'" class="fade-up pt-24 min-h-screen bg-white pb-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-16">
+      <div class="divider mx-auto mb-4"></div>
+      <h1 class="font-black text-5xl text-gray-900 uppercase tracking-tight mb-4">
+        Agenda des <span class="grad-text-purple">Événements</span>
+      </h1>
+      <p class="text-gray-500 max-w-xl mx-auto">Planifiez votre participation aux activités ICC RDC</p>
+    </div>
+
+    <!-- Schedule banner -->
+    <div class="icc-grad rounded-2xl p-8 mb-12 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+      <div>
+        <h3 class="font-black text-2xl mb-2 uppercase">Cultes hebdomadaires</h3>
+        <p class="text-white/70 text-sm">Rejoignez-nous chaque semaine pour la prédication de la Parole et la louange</p>
+      </div>
+      <div class="flex gap-5">
+        <template x-for="s in serviceTimes" :key="s.day">
+          <div class="glass rounded-2xl px-6 py-4 text-center">
+            <div class="text-gold-400 font-black text-2xl" x-text="s.time"></div>
+            <div class="text-white text-xs font-bold mt-1" x-text="s.day"></div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <!-- Events -->
+    <div class="space-y-5">
+      <template x-for="event in events" :key="event.id">
+        <div class="card-lift bg-gray-50 rounded-2xl p-6 border border-gray-100 flex flex-col sm:flex-row gap-5 items-start">
+          <div class="flex-shrink-0 w-20 h-20 rounded-2xl flex flex-col items-center justify-center font-bold text-white shadow-md"
+               :class="event.color||'icc-grad'">
+            <span class="text-xs font-bold opacity-80" x-text="getMonth(event.date)"></span>
+            <span class="text-2xl font-black" x-text="getDay(event.date)"></span>
+          </div>
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-3 mb-2">
+              <h3 class="font-black text-gray-900 text-lg uppercase tracking-wide" x-text="event.title"></h3>
+              <span class="icc-grad text-white text-xs font-bold px-3 py-1 rounded-full" x-text="event.type"></span>
+            </div>
+            <p class="text-gray-500 text-sm mb-3" x-text="event.description"></p>
+            <div class="flex flex-wrap gap-4 text-sm text-gray-400">
+              <span><i class="fas fa-clock text-icc-purple mr-1"></i> <span x-text="event.time"></span></span>
+              <span><i class="fas fa-map-marker-alt text-icc-purple mr-1"></i> <span x-text="event.location"></span></span>
+            </div>
+          </div>
+          <button class="flex-shrink-0 icc-grad text-white text-xs font-black px-5 py-3 rounded-xl transition hover:opacity-90 uppercase tracking-wide shadow-lg">
+            <i class="fas fa-calendar-plus mr-1"></i> Participer
+          </button>
+        </div>
+      </template>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CONTACT ==================== -->
+<div x-show="page==='contact'" class="fade-up pt-24 min-h-screen bg-gray-50 pb-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-16">
+      <div class="divider mx-auto mb-4"></div>
+      <h1 class="font-black text-5xl text-gray-900 uppercase tracking-tight mb-4">
+        Nous <span class="grad-text-purple">Contacter</span>
+      </h1>
+      <p class="text-gray-500">Nous sommes là pour vous. Venez comme vous êtes.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12">
+      <!-- Info -->
+      <div>
+        <div class="icc-grad-dark rounded-2xl p-8 text-white mb-6">
+          <h3 class="font-black text-2xl mb-6 uppercase">Informations</h3>
+          <div class="space-y-5">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-icc-purple/50 rounded-xl flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-map-marker-alt text-gold-400"></i>
+              </div>
+              <div>
+                <p class="font-bold text-sm mb-1">Adresse</p>
+                <p class="text-white/70 text-sm">8797, Av. de la Libération (ex-24 Novembre)<br/>Kasa-Vubu, Kinshasa — RDC</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-icc-purple/50 rounded-xl flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-clock text-gold-400"></i>
+              </div>
+              <div>
+                <p class="font-bold text-sm mb-1">Cultes</p>
+                <p class="text-white/70 text-sm">Samedi : 17h00<br/>Dimanche : 10h00</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-icc-purple/50 rounded-xl flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-envelope text-gold-400"></i>
+              </div>
+              <div>
+                <p class="font-bold text-sm mb-1">Email</p>
+                <p class="text-white/70 text-sm">contact@icc-kinshasa.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social -->
+        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+          <h4 class="font-black text-gray-900 mb-4 uppercase tracking-wide text-sm">Suivez-nous</h4>
+          <div class="flex gap-3">
+            <a href="https://www.instagram.com/icc_kinshasa/" target="_blank"
+               class="flex items-center gap-2 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition hover:scale-105">
+              <i class="fab fa-instagram"></i> @icc_kinshasa
+            </a>
+            <a href="https://www.facebook.com/icckin/" target="_blank"
+               class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition hover:scale-105">
+              <i class="fab fa-facebook-f"></i> icckin
+            </a>
+            <a href="https://www.youtube.com/@ghislainbiabatantoutv" target="_blank"
+               class="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition hover:scale-105">
+              <i class="fab fa-youtube"></i> YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+        <h3 class="font-black text-2xl text-gray-900 mb-6 uppercase">Envoyer un message</h3>
+        <form @submit.prevent="sendContact()" class="space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wide">Prénom *</label>
+              <input type="text" x-model="contactForm.firstName" required
+                     class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm transition" placeholder="Jean" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wide">Nom *</label>
+              <input type="text" x-model="contactForm.lastName" required
+                     class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm transition" placeholder="Kabila" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wide">Email *</label>
+            <input type="email" x-model="contactForm.email" required
+                   class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm transition" placeholder="jean@exemple.com" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wide">Sujet</label>
+            <select x-model="contactForm.subject"
+                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm bg-white">
+              <option>Demande d'information</option>
+              <option>Prière & soutien spirituel</option>
+              <option>Rejoindre ICC RDC</option>
+              <option>MBONGWANA TOUR</option>
+              <option>Don & offrande</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1.5 uppercase tracking-wide">Message *</label>
+            <textarea x-model="contactForm.message" required rows="5"
+                      class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm transition resize-none"
+                      placeholder="Votre message..."></textarea>
+          </div>
           <button type="submit"
-                  class="bg-gold-500 hover:bg-gold-600 text-royal-900 font-bold px-6 py-3 rounded-full transition hover:scale-105 whitespace-nowrap">
-            S'inscrire
+                  class="w-full icc-grad text-white font-black py-4 rounded-xl transition hover:opacity-90 hover:scale-[1.01] shadow-lg uppercase tracking-wide text-sm">
+            <i class="fas fa-paper-plane mr-2"></i> Envoyer
           </button>
         </form>
       </div>
-    </section>
-
+    </div>
   </div>
+</div>
 
-  <!-- ==================== CULTES EN DIRECT ==================== -->
-  <div x-show="page === 'cultes'" x-transition:enter="fade-in" class="pt-24 min-h-screen hero-bg pb-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-16">
-        <div class="section-divider mx-auto mb-4"></div>
-        <h1 class="font-serif text-5xl font-bold text-white mb-4">Cultes en <span class="gradient-text">Direct</span></h1>
-        <p class="text-white/60 max-w-xl mx-auto">Participez à nos cultes depuis où que vous soyez dans le monde</p>
+<!-- ==================== LOGIN ==================== -->
+<div x-show="page==='login'" class="fade-up pt-24 min-h-screen hero-section flex items-center justify-center pb-24">
+  <div class="w-full max-w-md mx-4">
+    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+      <div class="icc-grad p-8 text-center">
+        <img src="logo.png" alt="ICC RDC" class="h-20 mx-auto mb-4 object-contain" onerror="this.style.display='none'" />
+        <h2 class="font-black text-2xl text-white uppercase tracking-wide">Accès Admin</h2>
+        <p class="text-white/70 text-sm mt-1">Impact Centre Chrétien RDC</p>
       </div>
-
-      <!-- Live Streams -->
-      <div class="grid md:grid-cols-3 gap-6 mb-16">
-        <template x-for="stream in liveStreams" :key="stream.id">
-          <div class="card-hover bg-white/10 backdrop-blur border border-white/20 rounded-2xl overflow-hidden">
-            <div class="bg-gradient-to-br from-royal-800 to-purple-900 p-6">
-              <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center gap-2">
-                  <div class="w-3 h-3 rounded-full"
-                       :class="stream.isLive ? 'bg-red-500 pulse-live' : 'bg-gray-400'"></div>
-                  <span class="text-white text-xs font-bold tracking-widest"
-                        x-text="stream.isLive ? 'EN DIRECT' : 'PROGRAMMÉ'"></span>
-                </div>
-                <span class="bg-gold-500/20 text-gold-400 text-xs px-2 py-1 rounded-full" x-text="stream.schedule.split(' ').slice(-1)[0]"></span>
-              </div>
-              <i class="fas fa-video text-white/30 text-3xl mb-3 block"></i>
-              <h3 class="font-serif text-white font-bold text-lg" x-text="stream.title"></h3>
-            </div>
-            <div class="p-5">
-              <p class="text-white/60 text-sm mb-4 flex items-center gap-2">
-                <i class="fas fa-clock text-gold-400"></i> <span x-text="stream.schedule"></span>
-              </p>
-              <button @click="openStream(stream)"
-                      class="w-full py-2.5 rounded-xl font-bold text-sm transition"
-                      :class="stream.isLive
-                        ? 'bg-red-600 hover:bg-red-700 text-white animate-pulse'
-                        : 'bg-gold-500 hover:bg-gold-600 text-royal-900'">
-                <i class="fas" :class="stream.isLive ? 'fa-circle text-xs mr-1' : 'fa-play mr-1'"></i>
-                <span x-text="stream.isLive ? 'Rejoindre en direct' : 'Regarder'"></span>
+      <div class="p-8">
+        <form @submit.prevent="handleLogin()">
+          <div class="mb-6">
+            <label class="block text-xs font-black text-gray-700 mb-2 uppercase tracking-wide">Mot de passe</label>
+            <div class="relative">
+              <input :type="showPwd ? 'text' : 'password'" x-model="adminPassword" placeholder="••••••••"
+                     class="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-icc-purple outline-none pr-12 transition text-sm" />
+              <button type="button" @click="showPwd=!showPwd"
+                      class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                <i :class="showPwd ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
               </button>
             </div>
+            <p class="text-xs text-gray-400 mt-2"><i class="fas fa-info-circle mr-1"></i> Mot de passe par défaut : <code class="bg-gray-100 px-1 rounded">admin123</code></p>
           </div>
-        </template>
+          <button type="submit" class="w-full icc-grad text-white font-black py-4 rounded-xl transition hover:opacity-90 uppercase tracking-wide">
+            Se connecter
+          </button>
+        </form>
       </div>
+    </div>
+  </div>
+</div>
 
-      <!-- Video Player Modal -->
-      <div x-show="activeStream" x-cloak
-           class="fixed inset-0 z-[100] flex items-center justify-center modal-overlay bg-black/80"
-           @click.self="activeStream = null">
-        <div class="w-full max-w-4xl mx-4 bg-royal-900 rounded-2xl overflow-hidden shadow-2xl">
-          <div class="flex justify-between items-center p-5 border-b border-white/10">
-            <div>
-              <h3 class="text-white font-bold" x-text="activeStream?.title"></h3>
-              <p class="text-gold-400 text-sm" x-text="activeStream?.schedule"></p>
-            </div>
-            <button @click="activeStream = null" class="text-white/60 hover:text-white text-xl">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-          <div class="aspect-video bg-black">
-            <iframe x-show="activeStream" :key="activeStream?.id"
-                    :src="'https://www.youtube.com/embed/' + (activeStream?.youtubeId || 'live_stream') + '?autoplay=1'"
-                    class="w-full h-full" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-          </div>
-        </div>
-      </div>
+<!-- ==================== ADMIN ==================== -->
+<div x-show="page==='admin' && isAdmin" class="fade-up pt-24 min-h-screen bg-gray-100 pb-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
 
-      <!-- Sermons Archive -->
+    <div class="flex justify-between items-center mb-8">
       <div>
-        <div class="flex justify-between items-center mb-8">
-          <h2 class="font-serif text-3xl font-bold text-white">Sermons Récents</h2>
-          <div class="flex gap-2">
-            <button @click="sermonFilter = 'all'"
-                    class="px-4 py-2 rounded-full text-sm font-medium transition"
-                    :class="sermonFilter === 'all' ? 'bg-gold-500 text-royal-900' : 'bg-white/10 text-white hover:bg-white/20'">
-              Tous
-            </button>
-            <button @click="sermonFilter = 'predication'"
-                    class="px-4 py-2 rounded-full text-sm font-medium transition"
-                    :class="sermonFilter === 'predication' ? 'bg-gold-500 text-royal-900' : 'bg-white/10 text-white hover:bg-white/20'">
-              Prédications
-            </button>
-            <button @click="sermonFilter = 'louange'"
-                    class="px-4 py-2 rounded-full text-sm font-medium transition"
-                    :class="sermonFilter === 'louange' ? 'bg-gold-500 text-royal-900' : 'bg-white/10 text-white hover:bg-white/20'">
-              Louange
-            </button>
-          </div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-6">
-          <template x-for="video in filteredVideos()" :key="video.id">
-            <div class="card-hover bg-white/10 backdrop-blur border border-white/10 rounded-2xl overflow-hidden group">
-              <div class="relative aspect-video bg-black/50">
-                <img :src="'https://img.youtube.com/vi/' + video.youtubeId + '/hqdefault.jpg'"
-                     :alt="video.title" class="w-full h-full object-cover opacity-80" />
-                <div class="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition">
-                  <button @click="playVideo(video)"
-                          class="w-14 h-14 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center shadow-2xl transition hover:scale-110">
-                    <i class="fas fa-play text-white text-lg ml-1"></i>
-                  </button>
-                </div>
-                <span class="absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded-full"
-                      x-text="video.type || 'Sermon'"></span>
-              </div>
-              <div class="p-5">
-                <p class="text-gold-400 text-xs font-semibold mb-1 flex items-center gap-1">
-                  <i class="fas fa-calendar-alt"></i> <span x-text="formatDate(video.date)"></span>
-                </p>
-                <h3 class="text-white font-bold mb-1 line-clamp-2" x-text="video.title"></h3>
-                <p class="text-white/50 text-sm" x-text="video.preacher || 'Pasteur Moïse Mbiye'"></p>
-              </div>
-            </div>
-          </template>
-        </div>
+        <h1 class="font-black text-4xl text-gray-900 uppercase tracking-tight">Panneau Admin</h1>
+        <p class="text-gray-500 text-sm mt-1">Gestion du site ICC RDC — Kinshasa</p>
       </div>
+      <button @click="logout()" class="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 px-5 rounded-xl transition text-sm">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+      </button>
+    </div>
 
-      <!-- Video Player for sermons -->
-      <div x-show="activeVideo" x-cloak
-           class="fixed inset-0 z-[100] flex items-center justify-center modal-overlay bg-black/80"
-           @click.self="activeVideo = null">
-        <div class="w-full max-w-4xl mx-4 bg-royal-900 rounded-2xl overflow-hidden shadow-2xl">
-          <div class="flex justify-between items-center p-5 border-b border-white/10">
-            <h3 class="text-white font-bold" x-text="activeVideo?.title"></h3>
-            <button @click="activeVideo = null" class="text-white/60 hover:text-white text-xl">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-          <div class="aspect-video bg-black">
-            <iframe x-show="activeVideo"
-                    :src="'https://www.youtube.com/embed/' + activeVideo?.youtubeId + '?autoplay=1'"
-                    class="w-full h-full" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-          </div>
-        </div>
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 text-center">
+        <div class="text-3xl font-black text-icc-purple" x-text="news.length"></div>
+        <div class="text-gray-500 text-xs mt-1 font-semibold uppercase"><i class="fas fa-newspaper mr-1 text-gold-500"></i> Actualités</div>
+      </div>
+      <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 text-center">
+        <div class="text-3xl font-black text-icc-purple" x-text="videos.length"></div>
+        <div class="text-gray-500 text-xs mt-1 font-semibold uppercase"><i class="fas fa-video mr-1 text-gold-500"></i> Vidéos</div>
+      </div>
+      <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 text-center">
+        <div class="text-3xl font-black text-icc-purple" x-text="events.length"></div>
+        <div class="text-gray-500 text-xs mt-1 font-semibold uppercase"><i class="fas fa-calendar mr-1 text-gold-500"></i> Événements</div>
+      </div>
+      <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 text-center">
+        <div class="text-3xl font-black text-icc-purple" x-text="subscribers.length"></div>
+        <div class="text-gray-500 text-xs mt-1 font-semibold uppercase"><i class="fas fa-users mr-1 text-gold-500"></i> Abonnés</div>
       </div>
     </div>
-  </div>
 
-  <!-- ==================== NEWS ==================== -->
-  <div x-show="page === 'news'" x-transition:enter="fade-in" class="pt-24 min-h-screen bg-gray-50 pb-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-16">
-        <div class="section-divider mx-auto mb-4"></div>
-        <h1 class="font-serif text-5xl font-bold text-royal-900 mb-4">Actualités <span class="text-purple-700">&</span> Annonces</h1>
-        <p class="text-gray-500 max-w-xl mx-auto">Restez informé de toutes les nouvelles de Cité Bethel</p>
-      </div>
-
-      <!-- Search & Filter -->
-      <div class="flex flex-col sm:flex-row gap-4 mb-10">
-        <div class="relative flex-1">
-          <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-          <input type="text" x-model="newsSearch" placeholder="Rechercher..."
-                 class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm" />
-        </div>
-        <select x-model="newsCategory"
-                class="px-5 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm bg-white">
-          <option value="all">Toutes catégories</option>
-          <option value="Actualité">Actualité</option>
-          <option value="Événement">Événement</option>
-          <option value="Annonce">Annonce</option>
-        </select>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <template x-for="article in filteredNews()" :key="article.id">
-          <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
-            <div class="h-52 bg-gradient-to-br from-royal-800 to-purple-900 relative overflow-hidden flex items-center justify-center">
-              <i class="fas fa-church text-white/10 text-8xl absolute"></i>
-              <img x-show="article.image" :src="article.image" :alt="article.title"
-                   class="w-full h-full object-cover absolute inset-0" @error="$event.target.style.display='none'" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-              <div class="absolute bottom-3 left-4 right-4 flex justify-between items-center">
-                <span class="bg-gold-500 text-royal-900 text-xs font-bold px-3 py-1 rounded-full"
-                      x-text="article.category || 'Actualité'"></span>
-                <span class="text-white/70 text-xs" x-text="formatDate(article.date)"></span>
-              </div>
-            </div>
-            <div class="p-6">
-              <h3 class="font-serif font-bold text-royal-900 text-xl mb-3 line-clamp-2" x-text="article.title"></h3>
-              <p class="text-gray-500 text-sm leading-relaxed line-clamp-4" x-text="article.content"></p>
-              <button class="mt-4 text-royal-800 text-sm font-semibold hover:text-gold-500 transition">
-                Lire la suite <i class="fas fa-arrow-right ml-1"></i>
-              </button>
-            </div>
-          </div>
-        </template>
-      </div>
-
-      <div x-show="filteredNews().length === 0" class="text-center py-16 text-gray-400">
-        <i class="fas fa-search text-4xl mb-4 block"></i>
-        Aucun article trouvé.
-      </div>
+    <!-- Tabs -->
+    <div class="flex gap-2 mb-6 overflow-x-auto pb-1">
+      <template x-for="tab in adminTabs" :key="tab.id">
+        <button @click="adminTab=tab.id"
+                class="flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black whitespace-nowrap transition uppercase tracking-wide"
+                :class="adminTab===tab.id ? 'icc-grad text-white shadow-lg' : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'">
+          <i :class="tab.icon"></i> <span x-text="tab.label"></span>
+        </button>
+      </template>
     </div>
-  </div>
 
-  <!-- ==================== AGENDA ==================== -->
-  <div x-show="page === 'agenda'" x-transition:enter="fade-in" class="pt-24 min-h-screen bg-white pb-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-16">
-        <div class="section-divider mx-auto mb-4"></div>
-        <h1 class="font-serif text-5xl font-bold text-royal-900 mb-4">Agenda des <span class="text-purple-700">Événements</span></h1>
-        <p class="text-gray-500 max-w-xl mx-auto">Planifiez votre participation aux activités de Cité Bethel</p>
-      </div>
-
-      <!-- Monthly Services Banner -->
-      <div class="verse-card rounded-2xl p-6 mb-12 text-white flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
-          <h3 class="font-serif text-2xl font-bold mb-2">Cultes du Dimanche</h3>
-          <p class="text-white/70">Rejoignez-nous chaque dimanche pour trois services de louange et prédication</p>
+    <!-- NEWS TAB -->
+    <div x-show="adminTab==='news'" class="space-y-6">
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <h2 class="font-black text-xl text-gray-900 mb-6 uppercase">
+          <i class="fas fa-plus-circle text-icc-purple mr-2"></i>
+          <span x-text="editingNews ? 'Modifier l\'actualité' : 'Nouvelle actualité'"></span>
+        </h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <input type="text" x-model="newsForm.title" placeholder="Titre *"
+                 class="px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm" />
+          <select x-model="newsForm.category" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm bg-white">
+            <option>Actualité</option><option>Événement</option><option>Annonce</option><option>Impact</option>
+          </select>
+          <textarea x-model="newsForm.content" placeholder="Contenu *" rows="4"
+                    class="md:col-span-2 px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm resize-none"></textarea>
+          <input type="url" x-model="newsForm.image" placeholder="URL image (optionnel)"
+                 class="md:col-span-2 px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm" />
         </div>
-        <div class="flex gap-6 text-center">
-          <template x-for="s in serviceTimes" :key="s.time">
-            <div class="bg-white/10 rounded-xl px-5 py-3">
-              <div class="text-gold-400 font-black text-xl" x-text="s.time"></div>
-              <div class="text-white/60 text-xs" x-text="s.label"></div>
-            </div>
-          </template>
-        </div>
-      </div>
-
-      <!-- Events List -->
-      <div class="space-y-6">
-        <template x-for="event in events" :key="event.id">
-          <div class="card-hover bg-gray-50 rounded-2xl p-6 border border-gray-100 flex flex-col sm:flex-row gap-6 items-start">
-            <div class="flex-shrink-0 w-20 h-20 rounded-2xl flex flex-col items-center justify-center font-bold shadow-sm"
-                 :class="event.color || 'bg-royal-900'">
-              <span class="text-white/70 text-xs uppercase" x-text="getMonth(event.date)"></span>
-              <span class="text-white text-2xl font-black" x-text="getDay(event.date)"></span>
-            </div>
-            <div class="flex-1">
-              <div class="flex flex-wrap items-center gap-3 mb-2">
-                <h3 class="font-serif font-bold text-royal-900 text-xl" x-text="event.title"></h3>
-                <span class="bg-gold-100 text-gold-700 text-xs font-bold px-3 py-1 rounded-full" x-text="event.type"></span>
-              </div>
-              <p class="text-gray-500 text-sm mb-3" x-text="event.description"></p>
-              <div class="flex flex-wrap gap-4 text-sm text-gray-400">
-                <span><i class="fas fa-clock text-gold-500 mr-1"></i> <span x-text="event.time"></span></span>
-                <span><i class="fas fa-map-marker-alt text-gold-500 mr-1"></i> <span x-text="event.location"></span></span>
-              </div>
-            </div>
-            <button class="flex-shrink-0 bg-royal-900 hover:bg-royal-800 text-white text-sm font-bold px-5 py-2.5 rounded-xl transition">
-              <i class="fas fa-calendar-plus mr-1"></i> Participer
-            </button>
-          </div>
-        </template>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== CONTACT ==================== -->
-  <div x-show="page === 'contact'" x-transition:enter="fade-in" class="pt-24 min-h-screen bg-gray-50 pb-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-16">
-        <div class="section-divider mx-auto mb-4"></div>
-        <h1 class="font-serif text-5xl font-bold text-royal-900 mb-4">Nous <span class="text-purple-700">Contacter</span></h1>
-        <p class="text-gray-500">Nous sommes là pour vous. N'hésitez pas à nous écrire.</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-12">
-        <!-- Contact Info -->
-        <div>
-          <div class="verse-card rounded-2xl p-8 text-white mb-6">
-            <h3 class="font-serif text-2xl font-bold mb-6">Informations</h3>
-            <div class="space-y-5">
-              <div class="flex items-start gap-4">
-                <div class="w-10 h-10 bg-gold-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <i class="fas fa-map-marker-alt text-gold-400"></i>
-                </div>
-                <div>
-                  <p class="font-semibold text-sm mb-1">Adresse</p>
-                  <p class="text-white/70 text-sm">Siège Social Cité Bethel<br/>Kinshasa, République Démocratique du Congo</p>
-                </div>
-              </div>
-              <div class="flex items-start gap-4">
-                <div class="w-10 h-10 bg-gold-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <i class="fas fa-phone text-gold-400"></i>
-                </div>
-                <div>
-                  <p class="font-semibold text-sm mb-1">Téléphone</p>
-                  <p class="text-white/70 text-sm">+243 XXX XXX XXX</p>
-                </div>
-              </div>
-              <div class="flex items-start gap-4">
-                <div class="w-10 h-10 bg-gold-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <i class="fas fa-envelope text-gold-400"></i>
-                </div>
-                <div>
-                  <p class="font-semibold text-sm mb-1">Email</p>
-                  <p class="text-white/70 text-sm">info@citebethel.org</p>
-                </div>
-              </div>
-              <div class="flex items-start gap-4">
-                <div class="w-10 h-10 bg-gold-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <i class="fas fa-clock text-gold-400"></i>
-                </div>
-                <div>
-                  <p class="font-semibold text-sm mb-1">Cultes Dimanche</p>
-                  <p class="text-white/70 text-sm">7h30 • 11h30 • 16h00</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Social Media -->
-          <div class="bg-white rounded-2xl p-6 border border-gray-100">
-            <h4 class="font-bold text-royal-900 mb-4">Suivez-nous</h4>
-            <div class="flex gap-3">
-              <a href="#" class="w-10 h-10 bg-blue-600 hover:bg-blue-700 rounded-xl flex items-center justify-center text-white transition hover:scale-110">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" class="w-10 h-10 bg-red-600 hover:bg-red-700 rounded-xl flex items-center justify-center text-white transition hover:scale-110">
-                <i class="fab fa-youtube"></i>
-              </a>
-              <a href="#" class="w-10 h-10 bg-pink-600 hover:bg-pink-700 rounded-xl flex items-center justify-center text-white transition hover:scale-110">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="#" class="w-10 h-10 bg-sky-500 hover:bg-sky-600 rounded-xl flex items-center justify-center text-white transition hover:scale-110">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="#" class="w-10 h-10 bg-green-500 hover:bg-green-600 rounded-xl flex items-center justify-center text-white transition hover:scale-110">
-                <i class="fab fa-whatsapp"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Contact Form -->
-        <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
-          <h3 class="font-serif text-2xl font-bold text-royal-900 mb-6">Envoyer un message</h3>
-          <form @submit.prevent="sendContact()" class="space-y-5">
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1.5">Prénom *</label>
-                <input type="text" x-model="contactForm.firstName" required
-                       class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm transition" placeholder="Jean" />
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1.5">Nom *</label>
-                <input type="text" x-model="contactForm.lastName" required
-                       class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm transition" placeholder="Dupont" />
-              </div>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1.5">Email *</label>
-              <input type="email" x-model="contactForm.email" required
-                     class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm transition" placeholder="jean@exemple.com" />
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1.5">Sujet</label>
-              <select x-model="contactForm.subject"
-                      class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm transition bg-white">
-                <option>Demande d'information</option>
-                <option>Prière & soutien spirituel</option>
-                <option>Rejoindre l'église</option>
-                <option>Don & offrande</option>
-                <option>Autre</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1.5">Message *</label>
-              <textarea x-model="contactForm.message" required rows="5"
-                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm transition resize-none"
-                        placeholder="Votre message..."></textarea>
-            </div>
-            <button type="submit"
-                    class="w-full bg-royal-900 hover:bg-royal-800 text-white font-bold py-4 rounded-xl transition hover:scale-[1.01] shadow-lg">
-              <i class="fas fa-paper-plane mr-2"></i> Envoyer le message
-            </button>
-          </form>
+        <div class="flex gap-3 mt-4">
+          <button @click="saveNews()" class="flex items-center gap-2 icc-grad text-white font-black py-3 px-6 rounded-xl transition text-sm uppercase">
+            <i class="fas" :class="editingNews ? 'fa-save' : 'fa-plus'"></i>
+            <span x-text="editingNews ? 'Enregistrer' : 'Ajouter'"></span>
+          </button>
+          <button x-show="editingNews" @click="cancelEdit('news')" class="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-6 rounded-xl transition text-sm">
+            <i class="fas fa-times"></i> Annuler
+          </button>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- ==================== LOGIN ==================== -->
-  <div x-show="page === 'login'" x-transition:enter="fade-in"
-       class="pt-24 min-h-screen hero-bg flex items-center justify-center pb-20">
-    <div class="w-full max-w-md mx-4">
-      <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <div class="verse-card p-8 text-center">
-          <div class="w-16 h-16 bg-gold-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-lock text-gold-400 text-2xl"></i>
-          </div>
-          <h2 class="font-serif text-2xl font-bold text-white">Accès Administrateur</h2>
-          <p class="text-white/60 text-sm mt-1">Cité Bethel — Panneau de gestion</p>
-        </div>
-        <div class="p-8">
-          <form @submit.prevent="handleLogin()">
-            <div class="mb-6">
-              <label class="block text-sm font-medium text-gray-700 mb-2">Mot de passe</label>
-              <div class="relative">
-                <input :type="showPwd ? 'text' : 'password'"
-                       x-model="adminPassword"
-                       placeholder="••••••••"
-                       class="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:border-royal-700 outline-none pr-12 transition" />
-                <button type="button" @click="showPwd = !showPwd"
-                        class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                  <i :class="showPwd ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <h2 class="font-black text-xl text-gray-900 mb-6 uppercase">Articles publiés</h2>
+        <div class="space-y-3">
+          <template x-for="article in news" :key="article.id">
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
+              <div class="w-10 h-10 rounded-xl icc-grad flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-newspaper text-white text-sm"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-0.5">
+                  <h4 class="font-black text-gray-900 text-sm truncate" x-text="article.title"></h4>
+                  <span class="icc-grad text-white text-xs font-bold px-2 py-0.5 rounded-full flex-shrink-0" x-text="article.category||'Actualité'"></span>
+                </div>
+                <p class="text-gray-500 text-xs truncate" x-text="article.content"></p>
+                <p class="text-gray-400 text-xs mt-0.5" x-text="formatDate(article.date)"></p>
+              </div>
+              <div class="flex gap-2">
+                <button @click="editNews(article)" class="w-8 h-8 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg flex items-center justify-center transition">
+                  <i class="fas fa-pencil-alt text-xs"></i>
+                </button>
+                <button @click="deleteNews(article.id)" class="w-8 h-8 bg-red-100 hover:bg-red-200 text-red-600 rounded-lg flex items-center justify-center transition">
+                  <i class="fas fa-trash text-xs"></i>
                 </button>
               </div>
-              <p class="text-xs text-gray-400 mt-2"><i class="fas fa-info-circle mr-1"></i> Mot de passe par défaut: <code class="bg-gray-100 px-1 rounded">admin123</code></p>
             </div>
-            <button type="submit"
-                    class="w-full bg-royal-900 hover:bg-royal-800 text-white font-bold py-4 rounded-xl transition hover:scale-[1.01]">
-              Se connecter
-            </button>
-          </form>
+          </template>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- ==================== ADMIN ==================== -->
-  <div x-show="page === 'admin' && isAdmin" x-transition:enter="fade-in" class="pt-24 min-h-screen bg-gray-100 pb-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-
-      <!-- Header -->
-      <div class="flex justify-between items-center mb-8">
-        <div>
-          <h1 class="font-serif text-4xl font-bold text-royal-900">Panneau Admin</h1>
-          <p class="text-gray-500 text-sm mt-1">Gérez le contenu de votre site Cité Bethel</p>
+    <!-- VIDEOS TAB -->
+    <div x-show="adminTab==='videos'" class="space-y-6">
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <h2 class="font-black text-xl text-gray-900 mb-6 uppercase">
+          <span x-text="editingVideo ? 'Modifier la vidéo' : 'Ajouter une vidéo'"></span>
+        </h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <input type="text" x-model="videoForm.title" placeholder="Titre *" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm" />
+          <input type="text" x-model="videoForm.youtubeId" placeholder="ID YouTube *" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm" />
+          <input type="text" x-model="videoForm.preacher" placeholder="Prédicateur" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm" />
+          <select x-model="videoForm.type" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm bg-white">
+            <option value="predication">Prédication</option>
+            <option value="louange">Louange</option>
+            <option value="temoignage">Témoignage</option>
+          </select>
         </div>
-        <button @click="logout()"
-                class="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 px-5 rounded-xl transition">
-          <i class="fas fa-sign-out-alt"></i> Déconnexion
+        <div class="flex gap-3 mt-4">
+          <button @click="saveVideo()" class="flex items-center gap-2 icc-grad text-white font-black py-3 px-6 rounded-xl transition text-sm uppercase">
+            <i class="fas" :class="editingVideo ? 'fa-save' : 'fa-plus'"></i>
+            <span x-text="editingVideo ? 'Enregistrer' : 'Ajouter'"></span>
+          </button>
+          <button x-show="editingVideo" @click="cancelEdit('video')" class="bg-gray-200 text-gray-700 font-bold py-3 px-6 rounded-xl transition text-sm">
+            <i class="fas fa-times mr-1"></i> Annuler
+          </button>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <h2 class="font-black text-xl text-gray-900 mb-6 uppercase">Vidéos publiées</h2>
+        <div class="space-y-3">
+          <template x-for="video in videos" :key="video.id">
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
+              <img :src="'https://img.youtube.com/vi/'+video.youtubeId+'/default.jpg'" class="w-16 h-12 object-cover rounded-lg flex-shrink-0" />
+              <div class="flex-1 min-w-0">
+                <h4 class="font-black text-gray-900 text-sm truncate" x-text="video.title"></h4>
+                <p class="text-gray-400 text-xs" x-text="(video.preacher||'Pst Ghislain')+' • '+formatDate(video.date)"></p>
+              </div>
+              <div class="flex gap-2">
+                <button @click="editVideo(video)" class="w-8 h-8 bg-blue-100 text-blue-700 rounded-lg flex items-center justify-center"><i class="fas fa-pencil-alt text-xs"></i></button>
+                <button @click="deleteVideo(video.id)" class="w-8 h-8 bg-red-100 text-red-600 rounded-lg flex items-center justify-center"><i class="fas fa-trash text-xs"></i></button>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+
+    <!-- EVENTS TAB -->
+    <div x-show="adminTab==='events'" class="space-y-6">
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <h2 class="font-black text-xl text-gray-900 mb-6 uppercase">Ajouter un événement</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <input type="text" x-model="eventForm.title" placeholder="Titre *" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm" />
+          <select x-model="eventForm.type" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm bg-white">
+            <option>Culte</option><option>MBONGWANA</option><option>Séminaire</option><option>Concert</option><option>Conférence</option><option>Prière</option>
+          </select>
+          <input type="date" x-model="eventForm.date" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm" />
+          <input type="text" x-model="eventForm.time" placeholder="Heure (ex: 17h00)" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm" />
+          <input type="text" x-model="eventForm.location" placeholder="Lieu" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm" />
+          <textarea x-model="eventForm.description" placeholder="Description" rows="3" class="md:col-span-2 px-4 py-3 rounded-xl border border-gray-200 focus:border-icc-purple outline-none text-sm resize-none"></textarea>
+        </div>
+        <button @click="saveEvent()" class="mt-4 flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-black py-3 px-6 rounded-xl transition text-sm uppercase">
+          <i class="fas fa-plus"></i> Ajouter
         </button>
       </div>
-
-      <!-- Stats Cards -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-        <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 text-center">
-          <div class="text-3xl font-black text-royal-900" x-text="news.length"></div>
-          <div class="text-gray-500 text-sm mt-1"><i class="fas fa-newspaper mr-1 text-gold-500"></i> Actualités</div>
-        </div>
-        <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 text-center">
-          <div class="text-3xl font-black text-royal-900" x-text="videos.length"></div>
-          <div class="text-gray-500 text-sm mt-1"><i class="fas fa-video mr-1 text-gold-500"></i> Vidéos</div>
-        </div>
-        <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 text-center">
-          <div class="text-3xl font-black text-royal-900" x-text="events.length"></div>
-          <div class="text-gray-500 text-sm mt-1"><i class="fas fa-calendar mr-1 text-gold-500"></i> Événements</div>
-        </div>
-        <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 text-center">
-          <div class="text-3xl font-black text-royal-900" x-text="subscribers.length"></div>
-          <div class="text-gray-500 text-sm mt-1"><i class="fas fa-users mr-1 text-gold-500"></i> Abonnés</div>
-        </div>
-      </div>
-
-      <!-- Admin Tabs -->
-      <div class="flex gap-2 mb-6 overflow-x-auto pb-1">
-        <template x-for="tab in adminTabs" :key="tab.id">
-          <button @click="adminTab = tab.id"
-                  class="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition"
-                  :class="adminTab === tab.id ? 'bg-royal-900 text-white shadow' : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'">
-            <i :class="tab.icon"></i> <span x-text="tab.label"></span>
-          </button>
-        </template>
-      </div>
-
-      <!-- NEWS MANAGEMENT -->
-      <div x-show="adminTab === 'news'" class="space-y-6">
-        <!-- Add Article -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-          <h2 class="font-serif text-2xl font-bold text-royal-900 mb-6">
-            <i class="fas fa-plus-circle text-gold-500 mr-2"></i>
-            <span x-text="editingNews ? 'Modifier l\'actualité' : 'Nouvelle actualité'"></span>
-          </h2>
-          <div class="grid md:grid-cols-2 gap-4">
-            <input type="text" x-model="newsForm.title" placeholder="Titre de l'article *"
-                   class="px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm" />
-            <select x-model="newsForm.category"
-                    class="px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm bg-white">
-              <option>Actualité</option>
-              <option>Événement</option>
-              <option>Annonce</option>
-            </select>
-            <textarea x-model="newsForm.content" placeholder="Contenu de l'article *" rows="4"
-                      class="md:col-span-2 px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm resize-none"></textarea>
-            <input type="url" x-model="newsForm.image" placeholder="URL de l'image (optionnel)"
-                   class="md:col-span-2 px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm" />
-          </div>
-          <div class="flex gap-3 mt-4">
-            <button @click="saveNews()"
-                    class="flex items-center gap-2 bg-royal-900 hover:bg-royal-800 text-white font-bold py-3 px-6 rounded-xl transition">
-              <i class="fas" :class="editingNews ? 'fa-save' : 'fa-plus'"></i>
-              <span x-text="editingNews ? 'Enregistrer' : 'Ajouter'"></span>
-            </button>
-            <button x-show="editingNews" @click="cancelEdit('news')"
-                    class="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-6 rounded-xl transition">
-              <i class="fas fa-times"></i> Annuler
-            </button>
-          </div>
-        </div>
-
-        <!-- Articles List -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-          <h2 class="font-serif text-2xl font-bold text-royal-900 mb-6">Articles publiés</h2>
-          <div class="space-y-3">
-            <template x-for="article in news" :key="article.id">
-              <div class="flex items-start gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100 hover:border-gray-200 transition">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-royal-800 to-purple-900 flex items-center justify-center flex-shrink-0">
-                  <i class="fas fa-newspaper text-white/60"></i>
-                </div>
-                <div class="flex-1 min-w-0">
-                  <div class="flex items-center gap-2 mb-1">
-                    <h4 class="font-bold text-royal-900 truncate" x-text="article.title"></h4>
-                    <span class="bg-gold-100 text-gold-700 text-xs font-bold px-2 py-0.5 rounded-full flex-shrink-0"
-                          x-text="article.category || 'Actualité'"></span>
-                  </div>
-                  <p class="text-gray-500 text-sm truncate" x-text="article.content"></p>
-                  <p class="text-gray-400 text-xs mt-1" x-text="formatDate(article.date)"></p>
-                </div>
-                <div class="flex gap-2 flex-shrink-0">
-                  <button @click="editNews(article)"
-                          class="w-9 h-9 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg flex items-center justify-center transition">
-                    <i class="fas fa-pencil-alt text-sm"></i>
-                  </button>
-                  <button @click="deleteNews(article.id)"
-                          class="w-9 h-9 bg-red-100 hover:bg-red-200 text-red-600 rounded-lg flex items-center justify-center transition">
-                    <i class="fas fa-trash text-sm"></i>
-                  </button>
-                </div>
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <h2 class="font-black text-xl text-gray-900 mb-6 uppercase">Événements programmés</h2>
+        <div class="space-y-3">
+          <template x-for="event in events" :key="event.id">
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
+              <div class="w-14 h-14 rounded-xl flex flex-col items-center justify-center text-white font-bold text-xs flex-shrink-0 icc-grad">
+                <span x-text="getMonth(event.date)"></span>
+                <span class="text-lg font-black" x-text="getDay(event.date)"></span>
               </div>
-            </template>
-          </div>
-        </div>
-      </div>
-
-      <!-- VIDEO MANAGEMENT -->
-      <div x-show="adminTab === 'videos'" class="space-y-6">
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-          <h2 class="font-serif text-2xl font-bold text-royal-900 mb-6">
-            <i class="fas fa-plus-circle text-gold-500 mr-2"></i>
-            <span x-text="editingVideo ? 'Modifier la vidéo' : 'Ajouter une vidéo'"></span>
-          </h2>
-          <div class="grid md:grid-cols-2 gap-4">
-            <input type="text" x-model="videoForm.title" placeholder="Titre de la vidéo *"
-                   class="px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm" />
-            <input type="text" x-model="videoForm.youtubeId" placeholder="ID YouTube (ex: dQw4w9WgXcQ) *"
-                   class="px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm" />
-            <input type="text" x-model="videoForm.preacher" placeholder="Prédicateur"
-                   class="px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm" />
-            <select x-model="videoForm.type"
-                    class="px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm bg-white">
-              <option value="predication">Prédication</option>
-              <option value="louange">Louange</option>
-              <option value="temoignage">Témoignage</option>
-            </select>
-          </div>
-          <div class="flex gap-3 mt-4">
-            <button @click="saveVideo()"
-                    class="flex items-center gap-2 bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 px-6 rounded-xl transition">
-              <i class="fas" :class="editingVideo ? 'fa-save' : 'fa-plus'"></i>
-              <span x-text="editingVideo ? 'Enregistrer' : 'Ajouter la vidéo'"></span>
-            </button>
-            <button x-show="editingVideo" @click="cancelEdit('video')"
-                    class="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-6 rounded-xl transition">
-              <i class="fas fa-times"></i> Annuler
-            </button>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-          <h2 class="font-serif text-2xl font-bold text-royal-900 mb-6">Vidéos publiées</h2>
-          <div class="space-y-3">
-            <template x-for="video in videos" :key="video.id">
-              <div class="flex items-center gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
-                <img :src="'https://img.youtube.com/vi/' + video.youtubeId + '/default.jpg'"
-                     class="w-16 h-12 object-cover rounded-lg flex-shrink-0" :alt="video.title" />
-                <div class="flex-1 min-w-0">
-                  <h4 class="font-bold text-royal-900 truncate" x-text="video.title"></h4>
-                  <p class="text-gray-400 text-xs" x-text="(video.preacher || 'Pasteur Moïse Mbiye') + ' • ' + formatDate(video.date)"></p>
-                </div>
-                <div class="flex gap-2">
-                  <button @click="editVideo(video)"
-                          class="w-9 h-9 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded-lg flex items-center justify-center transition">
-                    <i class="fas fa-pencil-alt text-sm"></i>
-                  </button>
-                  <button @click="deleteVideo(video.id)"
-                          class="w-9 h-9 bg-red-100 hover:bg-red-200 text-red-600 rounded-lg flex items-center justify-center transition">
-                    <i class="fas fa-trash text-sm"></i>
-                  </button>
-                </div>
+              <div class="flex-1">
+                <h4 class="font-black text-gray-900 text-sm" x-text="event.title"></h4>
+                <p class="text-gray-400 text-xs" x-text="event.time+' • '+event.location"></p>
               </div>
-            </template>
-          </div>
+              <button @click="deleteEvent(event.id)" class="w-8 h-8 bg-red-100 text-red-600 rounded-lg flex items-center justify-center"><i class="fas fa-trash text-xs"></i></button>
+            </div>
+          </template>
         </div>
       </div>
-
-      <!-- EVENTS MANAGEMENT -->
-      <div x-show="adminTab === 'events'" class="space-y-6">
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-          <h2 class="font-serif text-2xl font-bold text-royal-900 mb-6">
-            <i class="fas fa-plus-circle text-gold-500 mr-2"></i> Ajouter un événement
-          </h2>
-          <div class="grid md:grid-cols-2 gap-4">
-            <input type="text" x-model="eventForm.title" placeholder="Titre de l'événement *"
-                   class="px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm" />
-            <select x-model="eventForm.type"
-                    class="px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm bg-white">
-              <option>Culte</option>
-              <option>Séminaire</option>
-              <option>Concert</option>
-              <option>Conférence</option>
-              <option>Prière</option>
-            </select>
-            <input type="date" x-model="eventForm.date"
-                   class="px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm" />
-            <input type="text" x-model="eventForm.time" placeholder="Heure (ex: 10h00)"
-                   class="px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm" />
-            <input type="text" x-model="eventForm.location" placeholder="Lieu"
-                   class="px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm" />
-            <textarea x-model="eventForm.description" placeholder="Description" rows="3"
-                      class="md:col-span-2 px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm resize-none"></textarea>
-          </div>
-          <button @click="saveEvent()"
-                  class="mt-4 flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl transition">
-            <i class="fas fa-plus"></i> Ajouter l'événement
-          </button>
-        </div>
-
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-          <h2 class="font-serif text-2xl font-bold text-royal-900 mb-6">Événements programmés</h2>
-          <div class="space-y-3">
-            <template x-for="event in events" :key="event.id">
-              <div class="flex items-center gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100">
-                <div class="w-14 h-14 rounded-xl flex flex-col items-center justify-center text-white font-bold text-xs flex-shrink-0"
-                     :class="event.color || 'bg-royal-900'">
-                  <span x-text="getMonth(event.date)"></span>
-                  <span class="text-lg font-black" x-text="getDay(event.date)"></span>
-                </div>
-                <div class="flex-1">
-                  <h4 class="font-bold text-royal-900" x-text="event.title"></h4>
-                  <p class="text-gray-400 text-xs" x-text="event.time + ' • ' + event.location"></p>
-                </div>
-                <button @click="deleteEvent(event.id)"
-                        class="w-9 h-9 bg-red-100 hover:bg-red-200 text-red-600 rounded-lg flex items-center justify-center transition">
-                  <i class="fas fa-trash text-sm"></i>
-                </button>
-              </div>
-            </template>
-          </div>
-        </div>
-      </div>
-
-      <!-- LIVE STREAMS MANAGEMENT -->
-      <div x-show="adminTab === 'live'" class="space-y-6">
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-          <h2 class="font-serif text-2xl font-bold text-royal-900 mb-6">Gérer les Cultes en Direct</h2>
-          <div class="space-y-4">
-            <template x-for="stream in liveStreams" :key="stream.id">
-              <div class="p-5 rounded-xl border-2 transition" :class="stream.isLive ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-gray-50'">
-                <div class="flex items-center justify-between mb-4">
-                  <h4 class="font-bold text-royal-900" x-text="stream.title"></h4>
-                  <label class="flex items-center gap-2 cursor-pointer">
-                    <span class="text-sm font-medium" :class="stream.isLive ? 'text-red-600' : 'text-gray-500'"
-                          x-text="stream.isLive ? '🔴 EN DIRECT' : 'Hors ligne'"></span>
-                    <div @click="toggleLive(stream.id)"
-                         class="w-12 h-6 rounded-full transition-colors cursor-pointer relative"
-                         :class="stream.isLive ? 'bg-red-500' : 'bg-gray-300'">
-                      <div class="w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform shadow-sm"
-                           :class="stream.isLive ? 'translate-x-6' : 'translate-x-0.5'"></div>
-                    </div>
-                  </label>
-                </div>
-                <div class="grid md:grid-cols-2 gap-3">
-                  <input type="text" :value="stream.youtubeId" @input="stream.youtubeId = $event.target.value"
-                         placeholder="ID YouTube du live"
-                         class="px-4 py-2.5 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm" />
-                  <input type="text" :value="stream.schedule" @input="stream.schedule = $event.target.value"
-                         class="px-4 py-2.5 rounded-xl border border-gray-200 focus:border-royal-700 outline-none text-sm" />
-                </div>
-              </div>
-            </template>
-          </div>
-        </div>
-      </div>
-
-      <!-- SUBSCRIBERS -->
-      <div x-show="adminTab === 'subscribers'" class="space-y-6">
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-          <h2 class="font-serif text-2xl font-bold text-royal-900 mb-6">
-            Abonnés Newsletter (<span x-text="subscribers.length"></span>)
-          </h2>
-          <div x-show="subscribers.length === 0" class="text-center py-12 text-gray-400">
-            <i class="fas fa-users text-4xl mb-4 block"></i>
-            Aucun abonné pour l'instant.
-          </div>
-          <div class="divide-y divide-gray-100">
-            <template x-for="sub in subscribers" :key="sub.email">
-              <div class="flex items-center justify-between py-3">
-                <div class="flex items-center gap-3">
-                  <div class="w-9 h-9 bg-royal-900 rounded-full flex items-center justify-center">
-                    <span class="text-white text-sm font-bold" x-text="sub.email[0].toUpperCase()"></span>
-                  </div>
-                  <div>
-                    <p class="font-medium text-sm" x-text="sub.email"></p>
-                    <p class="text-gray-400 text-xs" x-text="'Inscrit le ' + formatDate(sub.date)"></p>
-                  </div>
-                </div>
-                <button @click="removeSubscriber(sub.email)"
-                        class="text-red-400 hover:text-red-600 text-sm transition">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </template>
-          </div>
-        </div>
-      </div>
-
     </div>
+
+    <!-- LIVE TAB -->
+    <div x-show="adminTab==='live'" class="space-y-6">
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <h2 class="font-black text-xl text-gray-900 mb-6 uppercase">Gérer les Cultes en Direct</h2>
+        <div class="space-y-4">
+          <template x-for="stream in liveStreams" :key="stream.id">
+            <div class="p-5 rounded-xl border-2 transition" :class="stream.isLive ? 'border-red-400 bg-red-50' : 'border-gray-200 bg-gray-50'">
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="font-black text-gray-900 text-sm" x-text="stream.title"></h4>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold" :class="stream.isLive ? 'text-red-600' : 'text-gray-500'"
+                        x-text="stream.isLive ? '🔴 EN DIRECT' : 'Hors ligne'"></span>
+                  <div @click="toggleLive(stream.id)"
+                       class="w-11 h-6 rounded-full cursor-pointer relative transition-colors"
+                       :class="stream.isLive ? 'bg-red-500' : 'bg-gray-300'">
+                    <div class="w-4 h-4 bg-white rounded-full absolute top-1 transition-transform shadow"
+                         :class="stream.isLive ? 'translate-x-6' : 'translate-x-1'"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="grid md:grid-cols-2 gap-3">
+                <input type="text" :value="stream.youtubeId" @input="stream.youtubeId=$event.target.value" placeholder="ID YouTube"
+                       class="px-4 py-2 rounded-xl border border-gray-200 outline-none text-sm" />
+                <input type="text" :value="stream.schedule" @input="stream.schedule=$event.target.value"
+                       class="px-4 py-2 rounded-xl border border-gray-200 outline-none text-sm" />
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBSCRIBERS TAB -->
+    <div x-show="adminTab==='subscribers'" class="space-y-6">
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <h2 class="font-black text-xl text-gray-900 mb-6 uppercase">
+          Abonnés Newsletter (<span x-text="subscribers.length"></span>)
+        </h2>
+        <div x-show="subscribers.length===0" class="text-center py-12 text-gray-400">
+          <i class="fas fa-users text-4xl mb-4 block"></i> Aucun abonné pour l'instant.
+        </div>
+        <div class="divide-y divide-gray-100">
+          <template x-for="sub in subscribers" :key="sub.email">
+            <div class="flex items-center justify-between py-3">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 icc-grad rounded-full flex items-center justify-center">
+                  <span class="text-white text-sm font-black" x-text="sub.email[0].toUpperCase()"></span>
+                </div>
+                <div>
+                  <p class="font-bold text-sm" x-text="sub.email"></p>
+                  <p class="text-gray-400 text-xs" x-text="'Inscrit le '+formatDate(sub.date)"></p>
+                </div>
+              </div>
+              <button @click="removeSubscriber(sub.email)" class="text-red-400 hover:text-red-600 text-sm transition">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+
   </div>
+</div>
 
 </main>
 
 <!-- ===== FOOTER ===== -->
-<footer x-show="!['login','admin'].includes(page)" class="verse-card text-white py-16">
+<footer x-show="!['login','admin'].includes(page)" class="icc-grad-dark text-white py-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="grid md:grid-cols-4 gap-8 mb-12">
       <div class="md:col-span-2">
         <div class="flex items-center gap-3 mb-4">
-          <img src="logo.png" alt="Logo Cité Bethel" class="h-14 w-auto object-contain"
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
-          <div class="w-10 h-10 rounded-full bg-gold-500 items-center justify-center hidden">
-            <i class="fas fa-cross text-royal-900 text-lg"></i>
-          </div>
+          <img src="logo.png" alt="ICC RDC" class="h-14 w-auto object-contain" onerror="this.style.display='none'" />
           <div>
-            <div class="font-serif font-bold text-xl">CITÉ BETHEL</div>
-            <div class="text-gold-400 text-xs tracking-widest">ÉGLISE ASSEMBLÉE CENTRALE</div>
+            <div class="font-black text-xl uppercase tracking-wide">IMPACT CENTRE</div>
+            <div class="text-gold-400 text-xs font-bold tracking-[.2em]">CHRÉTIEN RDC</div>
           </div>
         </div>
-        <p class="text-white/60 text-sm leading-relaxed mb-4">Sous la direction du Pasteur Moïse Mbiye, Cité Bethel est une communauté de foi qui transforme des vies à travers la Parole de Dieu.</p>
+        <p class="text-white/60 text-sm leading-relaxed mb-4 max-w-sm">Sous la direction des Pasteurs Ghislain & Rossy Biabatantou, ICC RDC transforme des vies pour la gloire de Dieu à Kinshasa et au-delà.</p>
         <div class="flex gap-3">
-          <a href="#" class="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition">
+          <a href="https://www.instagram.com/icc_kinshasa/" target="_blank"
+             class="w-9 h-9 glass rounded-lg flex items-center justify-center hover:bg-white/20 transition">
+            <i class="fab fa-instagram text-sm"></i>
+          </a>
+          <a href="https://www.facebook.com/icckin/" target="_blank"
+             class="w-9 h-9 glass rounded-lg flex items-center justify-center hover:bg-white/20 transition">
             <i class="fab fa-facebook-f text-sm"></i>
           </a>
-          <a href="#" class="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition">
+          <a href="https://www.youtube.com/@ghislainbiabatantoutv" target="_blank"
+             class="w-9 h-9 glass rounded-lg flex items-center justify-center hover:bg-white/20 transition">
             <i class="fab fa-youtube text-sm"></i>
-          </a>
-          <a href="#" class="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition">
-            <i class="fab fa-instagram text-sm"></i>
           </a>
         </div>
       </div>
       <div>
-        <h4 class="font-bold text-sm tracking-widest text-gold-400 mb-4">NAVIGATION</h4>
+        <h4 class="font-black text-xs tracking-widest text-gold-400 mb-4 uppercase">Navigation</h4>
         <ul class="space-y-2">
           <template x-for="link in navLinks" :key="link.id">
-            <li>
-              <button @click="page = link.id" class="text-white/60 hover:text-white text-sm transition" x-text="link.label"></button>
-            </li>
+            <li><button @click="page=link.id" class="text-white/60 hover:text-white text-sm transition" x-text="link.label"></button></li>
           </template>
-          <li><button @click="page = 'contact'" class="text-white/60 hover:text-white text-sm transition">Contact</button></li>
+          <li><button @click="page='contact'" class="text-white/60 hover:text-white text-sm transition">Contact</button></li>
         </ul>
       </div>
       <div>
-        <h4 class="font-bold text-sm tracking-widest text-gold-400 mb-4">CULTES</h4>
+        <h4 class="font-black text-xs tracking-widest text-gold-400 mb-4 uppercase">Cultes</h4>
         <ul class="space-y-2 text-white/60 text-sm">
-          <li><i class="fas fa-clock text-gold-500 mr-2 text-xs"></i> Dimanche 7h30</li>
-          <li><i class="fas fa-clock text-gold-500 mr-2 text-xs"></i> Dimanche 11h30</li>
-          <li><i class="fas fa-clock text-gold-500 mr-2 text-xs"></i> Dimanche 16h00</li>
-          <li class="pt-2"><i class="fas fa-map-marker-alt text-gold-500 mr-2 text-xs"></i> Kinshasa, RDC</li>
+          <li><i class="fas fa-clock text-gold-400 mr-2 text-xs"></i> Samedi 17h00</li>
+          <li><i class="fas fa-clock text-gold-400 mr-2 text-xs"></i> Dimanche 10h00</li>
+          <li class="pt-3"><i class="fas fa-map-marker-alt text-gold-400 mr-2 text-xs"></i> Av. de la Libération</li>
+          <li><i class="fas fa-map-marker-alt text-transparent mr-2 text-xs"></i> Kasa-Vubu, Kinshasa</li>
+          <li class="pt-3"><i class="fab fa-instagram text-gold-400 mr-2 text-xs"></i> @icc_kinshasa</li>
         </ul>
       </div>
     </div>
-    <div class="border-t border-white/10 pt-6 text-center text-white/40 text-sm">
-      © <span x-text="new Date().getFullYear()"></span> Cité Bethel — Église Assemblée Centrale. Tous droits réservés.
+    <div class="border-t border-white/10 pt-6 text-center text-white/40 text-xs">
+      © <span x-text="new Date().getFullYear()"></span> Impact Centre Chrétien RDC — Kinshasa. Tous droits réservés. | <span class="text-gold-400/60">#MBONGWANA</span>
     </div>
   </div>
 </footer>
 
 <!-- Scroll to top -->
 <button x-show="scrolled" @click="window.scrollTo({top:0,behavior:'smooth'})"
-        x-transition class="fixed bottom-6 right-6 w-12 h-12 bg-gold-500 hover:bg-gold-600 text-royal-900 rounded-full shadow-2xl flex items-center justify-center z-50 transition hover:scale-110">
+        x-transition class="fixed bottom-6 right-6 w-12 h-12 icc-grad text-white rounded-full shadow-2xl flex items-center justify-center z-50 transition hover:scale-110">
   <i class="fas fa-arrow-up"></i>
 </button>
 
 <script>
-function churchApp() {
+function iccApp() {
   return {
-    // State
     page: 'home',
     scrolled: false,
     mobileMenu: false,
@@ -1246,26 +1260,21 @@ function churchApp() {
     newsCategory: 'all',
     newsletterEmail: '',
     toast: { show: false, message: '', type: 'success' },
-
-    // Edit states
     editingNews: null,
     editingVideo: null,
 
-    // Forms
     newsForm: { title: '', content: '', image: '', category: 'Actualité' },
     videoForm: { title: '', youtubeId: '', preacher: '', type: 'predication' },
     eventForm: { title: '', type: 'Culte', date: '', time: '', location: '', description: '' },
     contactForm: { firstName: '', lastName: '', email: '', subject: 'Demande d\'information', message: '' },
 
-    // Navigation
     navLinks: [
       { id: 'home', label: 'Accueil' },
-      { id: 'cultes', label: 'Cultes en Direct' },
+      { id: 'cultes', label: 'Messages & Cultes' },
       { id: 'news', label: 'Actualités' },
       { id: 'agenda', label: 'Agenda' },
     ],
 
-    // Admin tabs
     adminTabs: [
       { id: 'news', label: 'Actualités', icon: 'fas fa-newspaper' },
       { id: 'videos', label: 'Vidéos', icon: 'fas fa-video' },
@@ -1274,338 +1283,216 @@ function churchApp() {
       { id: 'subscribers', label: 'Abonnés', icon: 'fas fa-users' },
     ],
 
-    // Data
     serviceTimes: [
-      { time: '7h30', label: 'Culte du matin' },
-      { time: '11h30', label: 'Culte du milieu' },
-      { time: '16h00', label: 'Culte du soir' },
+      { day: 'Samedi', time: '17h00', label: 'Culte du soir' },
+      { day: 'Dimanche', time: '10h00', label: 'Culte du matin' },
     ],
 
-    missions: [
+    visions: [
       {
-        title: 'Adoration & Louange',
-        desc: 'Transformer les cœurs par la puissance de l\'adoration et la communion spirituelle authentique avec le Seigneur.',
-        icon: 'fas fa-music',
-        bg: 'bg-gradient-to-br from-purple-600 to-purple-800',
+        title: 'Impact & Transformation',
+        desc: 'Impacter chaque vie, chaque famille et chaque communauté de Kinshasa pour la gloire de Dieu.',
+        icon: 'fas fa-bolt',
       },
       {
-        title: 'Discipulat & Enseignement',
-        desc: 'Former des générations de disciples impactant positivement leur environnement selon les principes bibliques.',
-        icon: 'fas fa-bible',
-        bg: 'bg-gradient-to-br from-royal-800 to-royal-900',
+        title: 'Jeunesse & Avenir',
+        desc: 'Le Pasteur Ghislain, connu comme le "Pasteur des Jeunes de Kinshasa", place la jeunesse au cœur de la vision.',
+        icon: 'fas fa-users',
       },
       {
-        title: 'Évangélisation Mondiale',
-        desc: 'Porter la bonne nouvelle aux quatre coins du monde à travers 1 190 assemblées actives en RDC et à l\'étranger.',
+        title: 'Évangélisation Totale',
+        desc: 'À travers le mouvement MBONGWANA TOUR, des milliers d\'âmes sont touchées lors de campagnes massives en RDC.',
         icon: 'fas fa-globe-africa',
-        bg: 'bg-gradient-to-br from-gold-500 to-gold-600',
       },
     ],
 
     stats: [
-      { value: '1 190+', label: 'Assemblées mondiales' },
-      { value: '6', label: 'Albums gospel' },
-      { value: '3', label: 'Cultes/Dimanche' },
-      { value: '1980', label: 'Naissance — Kinshasa' },
+      { value: '2021', label: 'Arrivée à Kin' },
+      { value: '20+', label: 'Ans de ministère' },
+      { value: 'ICC', label: 'Réseau mondial' },
     ],
 
-    albums: ['Influence', 'Le Cœur de l\'Agneau', 'Champion', 'Héros', 'Triomphe (2020)', 'Royal (2022)'],
+    pastorTags: ['Prédicateur', 'Auteur', 'Coach', 'Motivateur', 'MBONGWANA TOUR', 'Pasteur des Jeunes', 'Formateur', 'ICC RDC'],
 
-    verseOfDay: {
-      text: '« Car là où deux ou trois sont assemblés en mon nom, je suis au milieu d\'eux. »',
-      ref: 'Matthieu 18:20',
+    verse: {
+      text: '« Je peux tout par celui qui me fortifie. »',
+      ref: 'Philippiens 4:13',
     },
 
-    particles: Array.from({ length: 12 }, (_, i) => ({
+    particles: Array.from({ length: 10 }, (_, i) => ({
       id: i,
-      size: Math.random() * 20 + 5,
+      size: Math.random() * 18 + 4,
       x: Math.random() * 100,
-      dur: Math.random() * 10 + 8,
-      delay: Math.random() * 10,
+      dur: Math.random() * 12 + 8,
+      delay: Math.random() * 12,
     })),
 
     news: [
-      {
-        id: 1,
-        title: 'Bienvenue à la Cité Bethel',
-        content: 'Rejoignez-nous chaque dimanche pour une expérience spirituelle transformatrice. Notre communauté vous accueille avec amour.',
-        date: '2026-06-15',
-        image: '',
-        category: 'Actualité',
-      },
-      {
-        id: 2,
-        title: 'Séminaire Spirituel — Juillet 2026',
-        content: 'Participez à notre séminaire mensuel sur les principes bibliques et la croissance spirituelle. Inscription ouverte.',
-        date: '2026-06-10',
-        image: '',
-        category: 'Événement',
-      },
-      {
-        id: 3,
-        title: 'Nouvelle Assemblée à Goma',
-        content: 'Cité Bethel ouvre sa 1 191ème assemblée dans la ville de Goma. Une grande célébration est prévue le 5 juillet.',
-        date: '2026-06-01',
-        image: '',
-        category: 'Annonce',
-      },
-      {
-        id: 4,
-        title: 'Concert de Louange — Août 2026',
-        content: 'Un grand concert de louange et d\'adoration est prévu au stade de Kinshasa en août. Venez nombreux !',
-        date: '2026-05-28',
-        image: '',
-        category: 'Événement',
-      },
+      { id: 1, title: 'Bienvenue à ICC RDC Kinshasa', content: 'Impact Centre Chrétien RDC vous accueille avec amour. Rejoignez-nous chaque samedi à 17h et dimanche à 10h pour vivre une expérience spirituelle transformatrice.', date: '2026-06-15', image: '', category: 'Actualité' },
+      { id: 2, title: 'MBONGWANA TOUR 2026 — Kinshasa', content: 'Le grand mouvement d\'évangélisation MBONGWANA TOUR fait son retour à Kinshasa ! Des milliers d\'âmes touchées, des vies transformées pour la gloire de Dieu.', date: '2026-06-10', image: '', category: 'Impact' },
+      { id: 3, title: 'Séminaire Leadership ICC — Juillet 2026', content: 'Un séminaire de formation pour les leaders et responsables de cellules. Inscriptions ouvertes dès maintenant. Places limitées.', date: '2026-06-05', image: '', category: 'Événement' },
+      { id: 4, title: 'Nouvelle Cellule — Commune de Ndjili', content: 'ICC RDC inaugure une nouvelle cellule dans la commune de Ndjili. Rejoignez-nous pour cette célébration de lancement !', date: '2026-05-28', image: '', category: 'Annonce' },
     ],
 
     videos: [
-      { id: 1, title: 'Prédication — La puissance de la foi', youtubeId: 'dQw4w9WgXcQ', date: '2026-06-15', type: 'predication', preacher: 'Pasteur Moïse Mbiye' },
-      { id: 2, title: 'Louange — Gloire à l\'Éternel', youtubeId: 'dQw4w9WgXcQ', date: '2026-06-08', type: 'louange', preacher: 'Équipe de louange' },
-      { id: 3, title: 'Sermon — La grâce de Dieu', youtubeId: 'dQw4w9WgXcQ', date: '2026-06-01', type: 'predication', preacher: 'Pasteur Moïse Mbiye' },
-      { id: 4, title: 'Témoignage — Miracle de guérison', youtubeId: 'dQw4w9WgXcQ', date: '2026-05-25', type: 'temoignage', preacher: 'Frère David' },
+      { id: 1, title: 'Prédication — La foi qui déplace les montagnes', youtubeId: 'dQw4w9WgXcQ', date: '2026-06-15', type: 'predication', preacher: 'Pst Ghislain Biabatantou' },
+      { id: 2, title: 'Culte de Louange — ICC Kinshasa', youtubeId: 'dQw4w9WgXcQ', date: '2026-06-08', type: 'louange', preacher: 'Équipe de Louange ICC' },
+      { id: 3, title: 'Message — L\'identité du croyant', youtubeId: 'dQw4w9WgXcQ', date: '2026-06-01', type: 'predication', preacher: 'Pst Rossy Biabatantou' },
+      { id: 4, title: 'MBONGWANA TOUR — Témoignages', youtubeId: 'dQw4w9WgXcQ', date: '2026-05-20', type: 'temoignage', preacher: 'Communauté ICC RDC' },
     ],
 
     liveStreams: [
-      { id: 1, title: 'Culte du Dimanche 7h30', isLive: false, schedule: 'Chaque dimanche 7h30', youtubeId: '' },
-      { id: 2, title: 'Culte du Dimanche 11h30', isLive: true, schedule: 'Chaque dimanche 11h30', youtubeId: 'dQw4w9WgXcQ' },
-      { id: 3, title: 'Culte du Dimanche 16h00', isLive: false, schedule: 'Chaque dimanche 16h00', youtubeId: '' },
+      { id: 1, title: 'Culte du Samedi', isLive: false, schedule: 'Chaque samedi 17h00', youtubeId: '' },
+      { id: 2, title: 'Culte du Dimanche', isLive: false, schedule: 'Chaque dimanche 10h00', youtubeId: '' },
     ],
 
     events: [
-      { id: 1, title: 'Culte de Jeûne & Prière', type: 'Prière', date: '2026-06-28', time: '6h00', location: 'Siège Cité Bethel, Kinshasa', description: 'Une matinée de jeûne, de prière et d\'intercession pour notre nation.', color: 'bg-purple-700' },
-      { id: 2, title: 'Séminaire de Leadership', type: 'Séminaire', date: '2026-07-05', time: '9h00', location: 'Salle de Conférence Bethel', description: 'Formation des leaders d\'assemblées sur la gestion et la vision spirituelle.', color: 'bg-royal-900' },
-      { id: 3, title: 'Concert de Louange & Adoration', type: 'Concert', date: '2026-07-19', time: '16h00', location: 'Stade de Kinshasa', description: 'Grand concert de louange avec le Pasteur Moïse Mbiye et son équipe.', color: 'bg-gold-500' },
-      { id: 4, title: 'Conférence Nationale Bethel', type: 'Conférence', date: '2026-08-10', time: '8h00', location: 'Siège National, Kinshasa', description: 'Rassemblement annuel de tous les pasteurs et responsables des 1 190 assemblées.', color: 'bg-green-700' },
+      { id: 1, title: 'MBONGWANA TOUR — Kinshasa', type: 'MBONGWANA', date: '2026-07-05', time: '15h00', location: 'Stade de Kinshasa', description: 'Grande campagne d\'évangélisation massive avec le Pasteur Ghislain Biabatantou. Entrée libre.', color: 'bg-icc-purple' },
+      { id: 2, title: 'Culte de Jeûne & Prière', type: 'Prière', date: '2026-07-12', time: '6h00', location: 'ICC Kasa-Vubu, Kinshasa', description: 'Matinée de jeûne, prière et intercession pour la RDC et les nations.', color: 'bg-icc-dpurple' },
+      { id: 3, title: 'Séminaire de Leadership', type: 'Séminaire', date: '2026-07-19', time: '9h00', location: 'Centre ICC Kinshasa', description: 'Formation des responsables de cellules et leaders de la communauté.', color: 'bg-icc-lpurple' },
+      { id: 4, title: 'Conférence ICC Réseau', type: 'Conférence', date: '2026-08-02', time: '10h00', location: 'ICC Kinshasa', description: 'Rassemblement des pasteurs et responsables ICC à travers toute la RDC.', color: 'bg-icc-purple' },
     ],
 
     subscribers: [],
 
-    // Init
     init() {
-      window.addEventListener('scroll', () => {
-        this.scrolled = window.scrollY > 60;
-      });
-      // Load from localStorage
-      const saved = localStorage.getItem('citebethel_data');
+      window.addEventListener('scroll', () => { this.scrolled = window.scrollY > 60; });
+      const saved = localStorage.getItem('icc_rdc_data');
       if (saved) {
-        const data = JSON.parse(saved);
-        if (data.news) this.news = data.news;
-        if (data.videos) this.videos = data.videos;
-        if (data.events) this.events = data.events;
-        if (data.subscribers) this.subscribers = data.subscribers;
-        if (data.liveStreams) this.liveStreams = data.liveStreams;
+        const d = JSON.parse(saved);
+        if (d.news) this.news = d.news;
+        if (d.videos) this.videos = d.videos;
+        if (d.events) this.events = d.events;
+        if (d.subscribers) this.subscribers = d.subscribers;
+        if (d.liveStreams) this.liveStreams = d.liveStreams;
       }
     },
 
     save() {
-      localStorage.setItem('citebethel_data', JSON.stringify({
-        news: this.news,
-        videos: this.videos,
-        events: this.events,
-        subscribers: this.subscribers,
-        liveStreams: this.liveStreams,
+      localStorage.setItem('icc_rdc_data', JSON.stringify({
+        news: this.news, videos: this.videos, events: this.events,
+        subscribers: this.subscribers, liveStreams: this.liveStreams,
       }));
     },
 
-    showToast(message, type = 'success') {
-      this.toast = { show: true, message, type };
+    showToast(msg, type = 'success') {
+      this.toast = { show: true, message: msg, type };
       setTimeout(() => { this.toast.show = false; }, 3000);
     },
 
-    // Auth
     handleLogin() {
       if (this.adminPassword === 'admin123') {
-        this.isAdmin = true;
-        this.page = 'admin';
-        this.adminPassword = '';
-        this.showToast('Connexion réussie. Bienvenue !');
+        this.isAdmin = true; this.page = 'admin'; this.adminPassword = '';
+        this.showToast('Bienvenue, Administrateur !');
       } else {
         this.showToast('Mot de passe incorrect.', 'error');
       }
     },
 
-    logout() {
-      this.isAdmin = false;
-      this.page = 'home';
-      this.showToast('Déconnecté avec succès.');
-    },
+    logout() { this.isAdmin = false; this.page = 'home'; this.showToast('Déconnecté.'); },
 
-    // News
     saveNews() {
-      if (!this.newsForm.title || !this.newsForm.content) {
-        return this.showToast('Titre et contenu requis.', 'error');
-      }
+      if (!this.newsForm.title || !this.newsForm.content) return this.showToast('Titre et contenu requis.', 'error');
       if (this.editingNews) {
         const idx = this.news.findIndex(n => n.id === this.editingNews);
         if (idx !== -1) this.news[idx] = { ...this.news[idx], ...this.newsForm };
-        this.editingNews = null;
-        this.showToast('Actualité mise à jour.');
+        this.editingNews = null; this.showToast('Actualité mise à jour.');
       } else {
-        this.news.unshift({
-          id: Date.now(),
-          ...this.newsForm,
-          date: new Date().toISOString().split('T')[0],
-        });
-        this.showToast('Actualité ajoutée avec succès.');
+        this.news.unshift({ id: Date.now(), ...this.newsForm, date: new Date().toISOString().split('T')[0] });
+        this.showToast('Actualité ajoutée.');
       }
       this.newsForm = { title: '', content: '', image: '', category: 'Actualité' };
       this.save();
     },
 
-    editNews(article) {
-      this.editingNews = article.id;
-      this.newsForm = { title: article.title, content: article.content, image: article.image || '', category: article.category || 'Actualité' };
-    },
+    editNews(a) { this.editingNews = a.id; this.newsForm = { title: a.title, content: a.content, image: a.image||'', category: a.category||'Actualité' }; },
 
     deleteNews(id) {
       if (!confirm('Supprimer cet article ?')) return;
-      this.news = this.news.filter(n => n.id !== id);
-      this.save();
-      this.showToast('Article supprimé.');
+      this.news = this.news.filter(n => n.id !== id); this.save(); this.showToast('Article supprimé.');
     },
 
     filteredNews() {
       return this.news.filter(a => {
-        const matchSearch = !this.newsSearch ||
-          a.title.toLowerCase().includes(this.newsSearch.toLowerCase()) ||
-          a.content.toLowerCase().includes(this.newsSearch.toLowerCase());
-        const matchCat = this.newsCategory === 'all' || a.category === this.newsCategory;
-        return matchSearch && matchCat;
+        const s = !this.newsSearch || a.title.toLowerCase().includes(this.newsSearch.toLowerCase()) || a.content.toLowerCase().includes(this.newsSearch.toLowerCase());
+        const c = this.newsCategory === 'all' || a.category === this.newsCategory;
+        return s && c;
       });
     },
 
-    // Videos
     saveVideo() {
-      if (!this.videoForm.title || !this.videoForm.youtubeId) {
-        return this.showToast('Titre et ID YouTube requis.', 'error');
-      }
+      if (!this.videoForm.title || !this.videoForm.youtubeId) return this.showToast('Titre et ID YouTube requis.', 'error');
       if (this.editingVideo) {
         const idx = this.videos.findIndex(v => v.id === this.editingVideo);
         if (idx !== -1) this.videos[idx] = { ...this.videos[idx], ...this.videoForm };
-        this.editingVideo = null;
-        this.showToast('Vidéo mise à jour.');
+        this.editingVideo = null; this.showToast('Vidéo mise à jour.');
       } else {
-        this.videos.unshift({
-          id: Date.now(),
-          ...this.videoForm,
-          date: new Date().toISOString().split('T')[0],
-        });
+        this.videos.unshift({ id: Date.now(), ...this.videoForm, date: new Date().toISOString().split('T')[0] });
         this.showToast('Vidéo ajoutée.');
       }
       this.videoForm = { title: '', youtubeId: '', preacher: '', type: 'predication' };
       this.save();
     },
 
-    editVideo(video) {
-      this.editingVideo = video.id;
-      this.videoForm = { title: video.title, youtubeId: video.youtubeId, preacher: video.preacher || '', type: video.type || 'predication' };
-    },
+    editVideo(v) { this.editingVideo = v.id; this.videoForm = { title: v.title, youtubeId: v.youtubeId, preacher: v.preacher||'', type: v.type||'predication' }; },
 
     deleteVideo(id) {
       if (!confirm('Supprimer cette vidéo ?')) return;
-      this.videos = this.videos.filter(v => v.id !== id);
-      this.save();
-      this.showToast('Vidéo supprimée.');
+      this.videos = this.videos.filter(v => v.id !== id); this.save(); this.showToast('Vidéo supprimée.');
     },
 
     filteredVideos() {
-      if (this.sermonFilter === 'all') return this.videos;
-      return this.videos.filter(v => v.type === this.sermonFilter);
+      return this.sermonFilter === 'all' ? this.videos : this.videos.filter(v => v.type === this.sermonFilter);
     },
 
-    playVideo(video) {
-      this.activeVideo = video;
-    },
+    playVideo(v) { this.activeVideo = v; },
+    openStream(s) { this.activeStream = s; },
 
-    openStream(stream) {
-      this.activeStream = stream;
-    },
-
-    // Events
     saveEvent() {
-      if (!this.eventForm.title || !this.eventForm.date) {
-        return this.showToast('Titre et date requis.', 'error');
-      }
-      const colors = ['bg-royal-900', 'bg-purple-700', 'bg-gold-500', 'bg-green-700', 'bg-red-700'];
-      this.events.push({
-        id: Date.now(),
-        ...this.eventForm,
-        color: colors[Math.floor(Math.random() * colors.length)],
-      });
+      if (!this.eventForm.title || !this.eventForm.date) return this.showToast('Titre et date requis.', 'error');
+      this.events.push({ id: Date.now(), ...this.eventForm, color: 'bg-icc-purple' });
       this.events.sort((a, b) => new Date(a.date) - new Date(b.date));
       this.eventForm = { title: '', type: 'Culte', date: '', time: '', location: '', description: '' };
-      this.save();
-      this.showToast('Événement ajouté.');
+      this.save(); this.showToast('Événement ajouté.');
     },
 
     deleteEvent(id) {
       if (!confirm('Supprimer cet événement ?')) return;
-      this.events = this.events.filter(e => e.id !== id);
-      this.save();
-      this.showToast('Événement supprimé.');
+      this.events = this.events.filter(e => e.id !== id); this.save(); this.showToast('Événement supprimé.');
     },
 
-    // Live streams
     toggleLive(id) {
-      const stream = this.liveStreams.find(s => s.id === id);
-      if (stream) stream.isLive = !stream.isLive;
-      this.save();
+      const s = this.liveStreams.find(s => s.id === id);
+      if (s) s.isLive = !s.isLive; this.save();
     },
 
-    hasLiveStream() {
-      return this.liveStreams.some(s => s.isLive);
-    },
+    hasLive() { return this.liveStreams.some(s => s.isLive); },
 
-    // Newsletter
     subscribeNewsletter() {
       if (!this.newsletterEmail) return;
-      if (this.subscribers.find(s => s.email === this.newsletterEmail)) {
-        return this.showToast('Cet email est déjà inscrit.', 'error');
-      }
+      if (this.subscribers.find(s => s.email === this.newsletterEmail)) return this.showToast('Email déjà inscrit.', 'error');
       this.subscribers.push({ email: this.newsletterEmail, date: new Date().toISOString().split('T')[0] });
-      this.newsletterEmail = '';
-      this.save();
-      this.showToast('Inscription confirmée ! Merci de votre intérêt.');
+      this.newsletterEmail = ''; this.save(); this.showToast('Inscription confirmée ! Merci !');
     },
 
-    removeSubscriber(email) {
-      this.subscribers = this.subscribers.filter(s => s.email !== email);
-      this.save();
-    },
+    removeSubscriber(email) { this.subscribers = this.subscribers.filter(s => s.email !== email); this.save(); },
 
-    // Contact
     sendContact() {
       this.contactForm = { firstName: '', lastName: '', email: '', subject: 'Demande d\'information', message: '' };
-      this.showToast('Message envoyé avec succès ! Nous vous répondrons bientôt.');
+      this.showToast('Message envoyé ! Nous vous répondrons bientôt.');
     },
 
     cancelEdit(type) {
-      if (type === 'news') {
-        this.editingNews = null;
-        this.newsForm = { title: '', content: '', image: '', category: 'Actualité' };
-      } else if (type === 'video') {
-        this.editingVideo = null;
-        this.videoForm = { title: '', youtubeId: '', preacher: '', type: 'predication' };
-      }
+      if (type === 'news') { this.editingNews = null; this.newsForm = { title: '', content: '', image: '', category: 'Actualité' }; }
+      else if (type === 'video') { this.editingVideo = null; this.videoForm = { title: '', youtubeId: '', preacher: '', type: 'predication' }; }
     },
 
-    // Helpers
-    formatDate(dateStr) {
-      if (!dateStr) return '';
-      const d = new Date(dateStr);
-      return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    formatDate(d) {
+      if (!d) return '';
+      return new Date(d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
     },
-
-    getDay(dateStr) {
-      if (!dateStr) return '';
-      return new Date(dateStr).getDate();
-    },
-
-    getMonth(dateStr) {
-      if (!dateStr) return '';
-      return new Date(dateStr).toLocaleDateString('fr-FR', { month: 'short' }).toUpperCase();
-    },
+    getDay(d) { return d ? new Date(d).getDate() : ''; },
+    getMonth(d) { return d ? new Date(d).toLocaleDateString('fr-FR', { month: 'short' }).toUpperCase() : ''; },
   };
 }
 </script>
